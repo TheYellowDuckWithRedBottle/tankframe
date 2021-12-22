@@ -2,10 +2,12 @@ package com.company;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 public class Tank {
     private int x, y;
-    private int width=20,height=20;
+    private int width=ResourceMgr.tankL.getWidth(),
+            height=ResourceMgr.tankL.getHeight();
     private final int Speed = 2;
     private Dir dir=Dir.UP;
     private boolean moving;
@@ -22,7 +24,22 @@ public class Tank {
     }
 
     public void paint(Graphics g){
-        g.fillRect(x,y,width,height);
+        switch (dir){
+            case LEFT:
+                g.drawImage(ResourceMgr.tankL,x,y,null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.tankR,x,y,null);
+                break;
+            case UP:
+                g.drawImage(ResourceMgr.tankU,x,y,null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.tankD,x,y,null);
+                break;
+            default:
+                break;
+        }
         move();
     }
     private void move(){
@@ -63,5 +80,6 @@ public class Tank {
         bullet = ComputeButtlePos(bullet);
         tankFrame.bullets.add(bullet);
         System.out.println("字单数量"+tankFrame.bullets.size());
+        System.out.println("字单数量"+tankFrame.tank);
     }
 }

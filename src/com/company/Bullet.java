@@ -5,8 +5,8 @@ import java.awt.*;
 public class Bullet {
 
     private int x, y;
-    private final int width=10;
-    private final int height=10;
+    private final int width=ResourceMgr.bulletL.getWidth();
+    private final int height=ResourceMgr.bulletL.getHeight();
     private final int Speed = 2;
     private Dir dir = Dir.DOWN;
     private boolean isLiving = true;
@@ -57,10 +57,26 @@ public class Bullet {
         if(!isLiving){
             this.tankFrame.bullets.remove(this);
         }
-        Color c =g.getColor();
-        g.setColor(new Color(255,0,0));
-        g.fillOval(x,y,width,height);
-        g.setColor(c);
+        switch (dir){
+            case LEFT:
+                g.drawImage(ResourceMgr.bulletL,x,y,null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.bulletR,x,y,null);
+                break;
+            case UP:
+                g.drawImage(ResourceMgr.bulletU,x,y,null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.bulletD,x,y,null);
+                break;
+            default:
+                break;
+        }
+//        Color c =g.getColor();
+//        g.setColor(new Color(255,0,0));
+//        g.fillOval(x,y,width,height);
+//        g.setColor(c);
         move();
     }
     public void move(){
