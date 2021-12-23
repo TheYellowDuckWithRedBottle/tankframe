@@ -100,5 +100,12 @@ public class Bullet {
             this.isLiving=false;
         }
     }
-
+    public void collideWithTank(Tank tank){
+        Rectangle bulletRec = new Rectangle(this.x,this.y,this.width,this.height);
+        Rectangle tankRec =new Rectangle(tank.getX(),tank.getY(),tank.getWidth(),tank.getHeight());
+        if(bulletRec.intersects(tankRec)){
+            this.isLiving =false;
+            tank.setLiving(false);
+        };
+    }
 }

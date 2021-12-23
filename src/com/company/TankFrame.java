@@ -8,8 +8,10 @@ import   java.util.List;
 
 public class TankFrame extends Frame {
     static int GAME_WIDTH = 800,GAME_HEIGHT=600;
-    Tank tank = new Tank(200,200,this);
+    Tank tank = new Tank(200,200,Group.GOOD,this);
+
     List<Bullet> bullets=new ArrayList<>();
+    List<Tank> tanks = new ArrayList<>();
     public TankFrame() throws HeadlessException {
         setSize(800,600);
         setResizable(false);
@@ -24,6 +26,14 @@ public class TankFrame extends Frame {
         tank.paint(g);
         for(int i=0;i<bullets.size();i++){
             bullets.get(i).paint(g);
+        }
+        for(int i =0;i<tanks.size();i++){
+            tanks.get(i).paint(g);
+        }
+        for(var i =0;i<bullets.size();i++){
+            for(var j=0;j<tanks.size();j++){
+                bullets.get(i).collideWithTank(tanks.get(j));
+            }
         }
     }
     Image offsetScreenImage = null;

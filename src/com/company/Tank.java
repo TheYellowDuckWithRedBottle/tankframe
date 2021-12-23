@@ -5,17 +5,43 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public class Tank {
-    private int x, y;
+    private int x;
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    private int y;
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     private int width=ResourceMgr.tankL.getWidth(),
             height=ResourceMgr.tankL.getHeight();
+
+    public void setLiving(boolean living) {
+        isLiving = living;
+    }
+
+    private boolean isLiving =true;
     private final int Speed = 2;
     private Dir dir=Dir.UP;
     private boolean moving;
     private TankFrame tankFrame;
+    private Group group;
+
     public Dir getDir() {
         return dir;
     }
-
     public void setDir(Dir dir) {
         this.dir = dir;
     }
@@ -24,23 +50,29 @@ public class Tank {
     }
 
     public void paint(Graphics g){
-        switch (dir){
-            case LEFT:
-                g.drawImage(ResourceMgr.tankL,x,y,null);
-                break;
-            case RIGHT:
-                g.drawImage(ResourceMgr.tankR,x,y,null);
-                break;
-            case UP:
-                g.drawImage(ResourceMgr.tankU,x,y,null);
-                break;
-            case DOWN:
-                g.drawImage(ResourceMgr.tankD,x,y,null);
-                break;
-            default:
-                break;
+        if(this.isLiving){
+            switch (dir){
+                case LEFT:
+                    g.drawImage(ResourceMgr.tankL,x,y,null);
+                    break;
+                case RIGHT:
+                    g.drawImage(ResourceMgr.tankR,x,y,null);
+                    break;
+                case UP:
+                    g.drawImage(ResourceMgr.tankU,x,y,null);
+                    break;
+                case DOWN:
+                    g.drawImage(ResourceMgr.tankD,x,y,null);
+                    break;
+                default:
+                    break;
+            }
+            move();
+        }else{
+                this.tankFrame.tanks.remove(this);
+            return;
         }
-        move();
+
     }
     private void move(){
         if(!moving) return;
@@ -62,9 +94,10 @@ public class Tank {
         }
     }
 
-    public Tank(int x, int y,TankFrame tf) {
+    public Tank(int x, int y,Group group ,TankFrame tf) {
         this.x = x;
         this.y = y;
+        this.group =group;
         this.tankFrame =tf;
     }
 
