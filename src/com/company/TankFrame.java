@@ -7,13 +7,15 @@ import java.util.ArrayList;
 import   java.util.List;
 
 public class TankFrame extends Frame {
-    static int GAME_WIDTH = 800,GAME_HEIGHT=600;
+   public static int GAME_WIDTH = 1200,GAME_HEIGHT=800;
     Tank tank = new Tank(200,200,Group.GOOD,this);
 
     List<Bullet> bullets=new ArrayList<>();
     List<Tank> tanks = new ArrayList<>();
+    List<Explode> explodes = new ArrayList<>();
+
     public TankFrame() throws HeadlessException {
-        setSize(800,600);
+        setSize(GAME_WIDTH,GAME_HEIGHT);
         setResizable(false);
         setVisible(true);
         Graphics g =getGraphics();
@@ -35,6 +37,10 @@ public class TankFrame extends Frame {
                 bullets.get(i).collideWithTank(tanks.get(j));
             }
         }
+        for(var i =0;i<explodes.size();i++){
+            explodes.get(i).paint(g);
+        }
+
     }
     Image offsetScreenImage = null;
 

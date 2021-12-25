@@ -7,9 +7,10 @@ public class Bullet {
     private int x, y;
     private final int width=ResourceMgr.bulletL.getWidth();
     private final int height=ResourceMgr.bulletL.getHeight();
-    private final int Speed = 2;
+    private final int Speed = 3;
     private Dir dir = Dir.DOWN;
     private boolean isLiving = true;
+    private Group group;
     private TankFrame tankFrame;
 
     public int getX() {
@@ -47,10 +48,11 @@ public class Bullet {
     public void setDir(Dir dir) {
         this.dir = dir;
     }
-    public Bullet(Dir dir, int x, int y,TankFrame tankFrame) {
+    public Bullet(Dir dir, int x, int y,Group group,TankFrame tankFrame) {
         this.dir = dir;
         this.x = x;
         this.y = y;
+        this.group = group;
         this.tankFrame =tankFrame;
     }
     public void paint(Graphics g){
@@ -73,10 +75,6 @@ public class Bullet {
             default:
                 break;
         }
-//        Color c =g.getColor();
-//        g.setColor(new Color(255,0,0));
-//        g.fillOval(x,y,width,height);
-//        g.setColor(c);
         move();
     }
     public void move(){
@@ -103,9 +101,17 @@ public class Bullet {
     public void collideWithTank(Tank tank){
         Rectangle bulletRec = new Rectangle(this.x,this.y,this.width,this.height);
         Rectangle tankRec =new Rectangle(tank.getX(),tank.getY(),tank.getWidth(),tank.getHeight());
-        if(bulletRec.intersects(tankRec)){
-            this.isLiving =false;
-            tank.setLiving(false);
-        };
+        if(this.group!=tank.getGroup()){
+            if(bulletRec.intersects(tankRec)){
+                this.isLiving =false;
+                int x =(int)(width/2-tank.getWidth()/2+tank.getX());
+                int y = (int)(height/2-tank.getHeight()/2+tank.getY());
+                Explode explode = new Explode(x,y,tankFrame);
+                this.tankFrame.explodes.add(explode);
+                tank.setLiving(false
+                );
+            };
+        }
+
     }
 }
