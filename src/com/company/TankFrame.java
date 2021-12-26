@@ -10,7 +10,7 @@ public class TankFrame extends Frame {
    public static int GAME_WIDTH = 1200,GAME_HEIGHT=800;
     Tank tank = new Tank(200,200,Group.GOOD,this);
 
-    List<Bullet> bullets=new ArrayList<>();
+   public List<Bullet> bullets=new ArrayList<>();
     List<Tank> tanks = new ArrayList<>();
     List<Explode> explodes = new ArrayList<>();
 
@@ -117,7 +117,7 @@ public class TankFrame extends Frame {
                     RIGHT = false;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    tank.fire();
+                    tank.fireStrategy.Fire(tank);
                 default:
                     break;
             }

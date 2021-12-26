@@ -1,8 +1,10 @@
 package com.company;
 
+import com.company.tankAbstract.BaseExplode;
+
 import java.awt.*;
 
-public class Explode {
+public class Explode extends BaseExplode {
     private int x,y;
     private int width=ResourceMgr.explores[0].getWidth(),
                 heigth =ResourceMgr.explores[0].getHeight();
@@ -14,6 +16,7 @@ public class Explode {
         this.y = y;
         this.tf = tf;
     }
+    @Override
     public void paint(Graphics g){
             g.drawImage(ResourceMgr.explores[step++],x,y,null);
             if(step>=ResourceMgr.explores.length){

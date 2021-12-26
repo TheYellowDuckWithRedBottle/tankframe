@@ -1,5 +1,8 @@
 package com.company;
 
+import com.company.bulletStratage.DefaultFireStrategy;
+import com.company.bulletStratage.FireStrategy;
+
 public class Main {
 
     public static void main(String[] args) {

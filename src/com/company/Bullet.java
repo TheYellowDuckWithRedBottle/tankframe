@@ -1,8 +1,10 @@
 package com.company;
 
+import com.company.tankAbstract.BaseBullet;
+
 import java.awt.*;
 
-public class Bullet {
+public class Bullet extends BaseBullet {
 
     private int x, y;
     private final int width=ResourceMgr.bulletL.getWidth();
@@ -11,6 +13,13 @@ public class Bullet {
     private Dir dir = Dir.DOWN;
     private boolean isLiving = true;
     private Group group;
+
+    public Bullet(int x, int y, TankFrame tankFrame) {
+        this.x = x;
+        this.y = y;
+        this.tankFrame = tankFrame;
+    }
+
     private TankFrame tankFrame;
 
     public int getX() {
@@ -55,6 +64,7 @@ public class Bullet {
         this.group = group;
         this.tankFrame =tankFrame;
     }
+    @Override
     public void paint(Graphics g){
         if(!isLiving){
             this.tankFrame.bullets.remove(this);

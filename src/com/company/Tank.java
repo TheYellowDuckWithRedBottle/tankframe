@@ -1,13 +1,17 @@
 package com.company;
 
+import com.company.bulletStratage.DefaultFireStrategy;
+import com.company.bulletStratage.FireStrategy;
+import com.company.bulletStratage.FourDirFireStrategy;
+import com.company.tankAbstract.BaseTank;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class Tank {
+public class Tank extends BaseTank {
     private int x;
-
     public int getX() {
         return x;
     }
@@ -43,6 +47,10 @@ public class Tank {
         return group;
     }
 
+    public TankFrame getTankFrame() {
+        return tankFrame;
+    }
+
     private Group group;
     private Random random = new Random();
 
@@ -55,7 +63,8 @@ public class Tank {
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
-
+    public FireStrategy fireStrategy = null;
+    @Override
     public void paint(Graphics g){
         if(this.isLiving){
             switch (dir){
@@ -114,16 +123,34 @@ public class Tank {
                 break;
         }
         if(Group.BAD==group&&random.nextInt(100)>95){
-            this.fire();
+            fireStrategy.Fire(this);
         }
     }
 
-    public Tank(int x, int y,Group group ,TankFrame tf) {
+    public Tank(int x, int y, Dir dir, TankFrame tankFrame, Group group) {
+        this.x = x;
+        this.y = y;
+        this.dir = dir;
+        this.tankFrame = tankFrame;
+        this.group = group;
+        if(group == Group.BAD){
+            this.fireStrategy = new DefaultFireStrategy();
+        }else{
+            this.fireStrategy = new FourDirFireStrategy();
+        }
+    }
+
+    public Tank(int x, int y, Group group , TankFrame tf) {
         this.x = x;
         this.y = y;
         this.group =group;
         this.tankFrame =tf;
         this.moving =true;
+        if(group == Group.BAD){
+            this.fireStrategy = new DefaultFireStrategy();
+        }else{
+            this.fireStrategy = new FourDirFireStrategy();
+        }
     }
 
     private Bullet ComputeButtlePos(Bullet bullet){
@@ -138,7 +165,5 @@ public class Tank {
         Bullet bullet = new Bullet(this.dir,this.x,this.y,this.group,this.tankFrame);
         ComputeButtlePos(bullet);
         tankFrame.bullets.add(bullet);
-        System.out.println("字单数量"+tankFrame.bullets.size());
-        System.out.println("字单数量"+tankFrame.tank);
     }
 }
