@@ -9,20 +9,30 @@ import java.io.IOException;
 public class ResourceMgr {
     public static BufferedImage tankL,tankR,tankU,tankD;
     public static BufferedImage bulletL,bulletR,bulletU,bulletD;
+    public static BufferedImage badTankL,badTankR,badTankU,badTankD;
+    public static BufferedImage[] explodes=new BufferedImage[17];
 
     static{
         try {
 
-            tankL =ImageIO.read(new File("G:\\jpa\\tankframe\\src\\resource\\tankL.gif"));
-            //tankL =ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("tankR.gif"));
-            tankR = ImageIO.read(new File("G:\\jpa\\tankframe\\src\\resource\\tankR.gif"));
-            tankU = ImageIO.read(new File("G:\\jpa\\tankframe\\src\\resource\\tankU.gif"));
-            tankD = ImageIO.read(new File("G:\\jpa\\tankframe\\src\\resource\\tankD.gif"));
+            tankU =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\GoodTank1.png"));
+            tankR = ImageUtility.RotateImage(tankU,90);
+            tankL = ImageUtility.RotateImage(tankU,-90);
+            tankD = ImageUtility.RotateImage(tankU,180);
 
-            bulletL = ImageIO.read(new File("G:\\jpa\\tankframe\\src\\resource\\bulletL.gif"));
-            bulletR = ImageIO.read(new File("G:\\jpa\\tankframe\\src\\resource\\bulletR.gif"));
-            bulletU = ImageIO.read(new File("G:\\jpa\\tankframe\\src\\resource\\bulletU.gif"));
-            bulletD = ImageIO.read(new File("G:\\jpa\\tankframe\\src\\resource\\bulletD.gif"));
+            badTankU =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\BadTank1.png"));
+            badTankR = ImageUtility.RotateImage(badTankU,90);
+            badTankL = ImageUtility.RotateImage(badTankU,-90);
+            badTankD = ImageUtility.RotateImage(badTankU,180);
+
+            bulletU = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\bulletU.png"));
+            bulletL = ImageUtility.RotateImage(bulletU,-90);
+            bulletR = ImageUtility.RotateImage(bulletU,90);
+            bulletD = ImageUtility.RotateImage(bulletU,180);
+
+            for(var i =1;i<17;i++){
+                explodes[i]=ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\e"+i+".gif"));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

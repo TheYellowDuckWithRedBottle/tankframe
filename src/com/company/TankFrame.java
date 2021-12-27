@@ -12,6 +12,7 @@ public class TankFrame extends Frame {
 
     List<Bullet> bullets=new ArrayList<>();
     List<Tank> tanks = new ArrayList<>();
+    List<Explode> explodes = new ArrayList<>();
     public TankFrame() throws HeadlessException {
         setSize(800,600);
         setResizable(false);
@@ -34,6 +35,9 @@ public class TankFrame extends Frame {
             for(var j=0;j<tanks.size();j++){
                 bullets.get(i).collideWithTank(tanks.get(j));
             }
+        }
+        for(var i =0;i<explodes.size();i++){
+            explodes.get(i).paint(g);
         }
     }
     Image offsetScreenImage = null;
