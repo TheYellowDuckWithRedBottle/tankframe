@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import   java.util.List;
 
 public class TankFrame extends Frame {
-    static int GAME_WIDTH = 800,GAME_HEIGHT=600;
+    static int GAME_WIDTH = 1500,GAME_HEIGHT=1000;
     Tank tank = new Tank(200,200,Group.GOOD,this);
 
-    List<Bullet> bullets=new ArrayList<>();
+    public List<Bullet> bullets=new ArrayList<>();
     List<Tank> tanks = new ArrayList<>();
     List<Explode> explodes = new ArrayList<>();
     public TankFrame() throws HeadlessException {
-        setSize(800,600);
+        setSize(GAME_WIDTH,GAME_HEIGHT);
         setResizable(false);
         setVisible(true);
         Graphics g =getGraphics();

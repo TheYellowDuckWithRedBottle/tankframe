@@ -1,5 +1,9 @@
 package com.company;
 
+import com.company.bulletStrategy.DefaultFireStrategy;
+import com.company.bulletStrategy.FireStrategy;
+import com.company.bulletStrategy.FourDirStrategy;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -16,6 +20,12 @@ public class Tank {
     private boolean moving = true;
     private Group group;
     private Random randomDir = new Random();
+    private FireStrategy fireStrategy;
+
+    public TankFrame getTankFrame() {
+        return tankFrame;
+    }
+
     private TankFrame tankFrame;
 
     public int getX() {
@@ -120,6 +130,9 @@ public class Tank {
         this.group =group;
         if(group == Group.GOOD){
             moving = false;
+            fireStrategy = new FourDirStrategy();
+        }else{
+            fireStrategy = new DefaultFireStrategy();
         }
         this.tankFrame =tf;
     }
@@ -132,9 +145,10 @@ public class Tank {
         return bullet;
     }
     public void fire() {
-        Bullet bullet = new Bullet(this.dir,this.x,this.y,this.group,this.tankFrame);
-        bullet = ComputeButtlePos(bullet);
-        tankFrame.bullets.add(bullet);
+//        Bullet bullet = new Bullet(this.dir,this.x,this.y,this.group,this.tankFrame);
+//        bullet = ComputeButtlePos(bullet);
+//        tankFrame.bullets.add(bullet);
+        fireStrategy.Fire(this);
         System.out.println("字单数量"+tankFrame.bullets.size());
         System.out.println("字单数量"+tankFrame.explodes.size());
     }
