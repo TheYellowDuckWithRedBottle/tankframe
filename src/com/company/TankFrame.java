@@ -1,18 +1,25 @@
 package com.company;
 
+import com.company.abstractFactory.*;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import   java.util.List;
 
-public class TankFrame extends Frame {
-    static int GAME_WIDTH = 1500,GAME_HEIGHT=1000;
-    Tank tank = new Tank(200,200,Group.GOOD,this);
+import static com.company.Group.*;
 
-    public List<Bullet> bullets=new ArrayList<>();
-    List<Tank> tanks = new ArrayList<>();
-    List<Explode> explodes = new ArrayList<>();
+public class TankFrame extends Frame {
+
+    public static int GAME_WIDTH = 1500,GAME_HEIGHT=1000;
+    BaseTank tank = new Tank(200,200, GOOD,this);
+    public GameFactory defaultFactory = new DefaultFactory();
+
+
+    public List<BaseBullet> bullets=new ArrayList<>();
+    public List<BaseTank> tanks = new ArrayList<>();
+    public List<BaseExplode> explodes = new ArrayList<>();
     public TankFrame() throws HeadlessException {
         setSize(GAME_WIDTH,GAME_HEIGHT);
         setResizable(false);
@@ -33,7 +40,8 @@ public class TankFrame extends Frame {
         }
         for(var i =0;i<bullets.size();i++){
             for(var j=0;j<tanks.size();j++){
-                bullets.get(i).collideWithTank(tanks.get(j));
+               BaseBullet bullet = bullets.get(i);
+               bullet.collideWithTank(tanks.get(j));
             }
         }
         for(var i =0;i<explodes.size();i++){

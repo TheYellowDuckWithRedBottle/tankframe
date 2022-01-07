@@ -1,36 +1,48 @@
-package com.company;
+package com.company.abstractFactory;
 
-import com.company.abstractFactory.BaseBullet;
-import com.company.abstractFactory.BaseExplode;
-import com.company.abstractFactory.BaseTank;
+import com.company.Dir;
+import com.company.Group;
+import com.company.ResourceMgr;
+import com.company.TankFrame;
 
 import java.awt.*;
 
-public class Bullet extends BaseBullet {
-
-    private int x, y;
-    private final int width=ResourceMgr.bulletL.getWidth();
-    private final int height=ResourceMgr.bulletL.getHeight();
-    private final int Speed = 3;
-    private Dir dir = Dir.DOWN;
-    private boolean isLiving = true;
-    private Group group;
-    private TankFrame tankFrame;
-
-    public int getX() {
-        return x;
-    }
-
+/**
+ * @ClassName
+ * @Description TODO
+ * @Author LeviFan
+ * @Date 2022/1/4 21:58
+ * @Version 1.0
+ **/
+public class RectBullet extends BaseBullet{
     public void setX(int x) {
         this.x = x;
     }
 
-    public int getY() {
-        return y;
-    }
-
     public void setY(int y) {
         this.y = y;
+    }
+
+    private int x;
+    private int y;
+    private final int width= 10;
+    private final int height=10;
+    private Dir dir = Dir.DOWN;
+
+    public void setLiving(boolean living) {
+        isLiving = living;
+    }
+
+    private boolean isLiving;
+    private final int Speed = 3;
+    private Group group;
+    private TankFrame tankFrame;
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public int getWidth() {
@@ -41,48 +53,30 @@ public class Bullet extends BaseBullet {
         return height;
     }
 
-    public boolean isLiving() {
-        return isLiving;
-    }
-    public void setLiving(boolean living) {
-        isLiving = living;
-    }
 
-
-    public void setDir(Dir dir) {
-        this.dir = dir;
-    }
-    public Bullet(Dir dir, int x, int y,Group group,TankFrame tankFrame) {
-        this.dir = dir;
-        this.x = x;
-        this.y = y;
-        this.group = group;
-        this.tankFrame =tankFrame;
-    }
     public void paint(Graphics g){
         if(!isLiving){
             this.tankFrame.bullets.remove(this);
         }
+        Color c =g.getColor();
+        g.setColor(new Color(255,0,0));
         switch (dir){
             case LEFT:
-                g.drawImage(ResourceMgr.bulletL,x,y,null);
+                g.fillRect(x,y,10,10);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.bulletR,x,y,null);
+                g.fillRect(x,y,10,10);
                 break;
             case UP:
-                g.drawImage(ResourceMgr.bulletU,x,y,null);
+                g.fillRect(x,y,10,10);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.bulletD,x,y,null);
+                g.fillRect(x,y,10,10);
                 break;
             default:
                 break;
         }
-//        Color c =g.getColor();
-//        g.setColor(new Color(255,0,0));
-//        g.fillOval(x,y,width,height);
-//        g.setColor(c);
+        g.setColor(c);
         move();
     }
 
@@ -108,8 +102,17 @@ public class Bullet extends BaseBullet {
             this.isLiving=false;
         }
     }
+    public RectBullet(Dir dir, int x, int y, Group group, TankFrame tankFrame) {
+        this.dir = dir;
+        this.x = x;
+        this.y = y;
+        this.group = group;
+        this.isLiving =true;
+        this.tankFrame =tankFrame;
+    }
+
     @Override
-    public void collideWithTank(BaseTank tank) {
+    public void collideWithTank(BaseTank tank){
         Rectangle bulletRec = new Rectangle(this.x,this.y,this.width,this.height);
         Rectangle tankRec =new Rectangle(tank.getX(),tank.getY(),tank.getWidth(),tank.getHeight());
         if(this.group!=tank.getGroup()){
@@ -122,5 +125,4 @@ public class Bullet extends BaseBullet {
             };
         }
     }
-
 }

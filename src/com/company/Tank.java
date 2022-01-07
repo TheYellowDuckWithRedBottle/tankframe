@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.abstractFactory.BaseTank;
 import com.company.bulletStrategy.DefaultFireStrategy;
 import com.company.bulletStrategy.FireStrategy;
 import com.company.bulletStrategy.FourDirStrategy;
@@ -9,7 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class Tank {
+public class Tank extends BaseTank {
     private int x;
     private int y;
     private int width=ResourceMgr.tankL.getWidth(),
@@ -21,12 +22,13 @@ public class Tank {
     private Group group;
     private Random randomDir = new Random();
     private FireStrategy fireStrategy;
+    private TankFrame tankFrame;
 
     public TankFrame getTankFrame() {
         return tankFrame;
     }
 
-    private TankFrame tankFrame;
+
 
     public int getX() {
         return x;
@@ -149,7 +151,7 @@ public class Tank {
 //        bullet = ComputeButtlePos(bullet);
 //        tankFrame.bullets.add(bullet);
         fireStrategy.Fire(this);
-        System.out.println("字单数量"+tankFrame.bullets.size());
-        System.out.println("字单数量"+tankFrame.explodes.size());
+        System.out.println("子弹数量"+tankFrame.bullets.size());
+        System.out.println("爆炸数量"+tankFrame.explodes.size());
     }
 }
