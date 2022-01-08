@@ -23,13 +23,16 @@ public class GameModel {
     public List<GameObject> objects = new ArrayList<>();
     Tank tank = new Tank(200, 200, Group.GOOD, this);
     ColliderChain colliderChain = new ColliderChain();
-    Collider collider = new TankBulletCollider();
-    Collider collider1 = new TankTankCollider();
+
 
     public GameModel() {
         for (var i = 1; i < 7; i++) {
             objects.add(new Tank(i * 100, i * 100, Group.BAD, this));
         }
+       objects.add(new Wall(500,100,30,300));
+        objects.add(new Wall(600,100,30,300));
+        objects.add(new Wall(700,100,30,300));
+        objects.add(new Wall(800,100,30,300));
     }
     public void add(GameObject gm){
         this.objects.add(gm);
