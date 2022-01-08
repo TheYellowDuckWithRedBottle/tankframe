@@ -20,16 +20,19 @@ public class GameModel {
     //    public List<Bullet> bullets=new ArrayList<>();
 //    List<Tank> tanks = new ArrayList<>();
 //    List<Explode> explodes = new ArrayList<>();
+
     public List<GameObject> objects = new ArrayList<>();
     Tank tank = new Tank(200, 200, Group.GOOD, this);
     ColliderChain colliderChain = new ColliderChain();
-
-
-    public GameModel() {
+    private static final GameModel INSTANCE = new GameModel();
+    public static GameModel getInstance() {
+        return INSTANCE;
+    }
+    private GameModel() {
         for (var i = 1; i < 7; i++) {
             objects.add(new Tank(i * 100, i * 100, Group.BAD, this));
         }
-       objects.add(new Wall(500,100,30,300));
+        objects.add(new Wall(500,100,30,300));
         objects.add(new Wall(600,100,30,300));
         objects.add(new Wall(700,100,30,300));
         objects.add(new Wall(800,100,30,300));
