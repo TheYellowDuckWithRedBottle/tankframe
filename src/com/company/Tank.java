@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class Tank {
+public class Tank extends GameObject {
     private int x;
     private int y;
     private int width=ResourceMgr.tankL.getWidth(),
@@ -51,7 +51,7 @@ public class Tank {
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
-
+    @Override
     public void paint(Graphics g){
         if(this.isLiving){
             switch (dir){
@@ -72,7 +72,7 @@ public class Tank {
             }
             move();
         }else{
-                this.gameModel.tanks.remove(this);
+                this.gameModel.objects.remove(this);
             return;
         }
 
@@ -145,7 +145,5 @@ public class Tank {
 //        bullet = ComputeButtlePos(bullet);
 //        tankFrame.bullets.add(bullet);
         fireStrategy.Fire(this);
-        System.out.println("字单数量"+gameModel.bullets.size());
-        System.out.println("字单数量"+gameModel.explodes.size());
     }
 }

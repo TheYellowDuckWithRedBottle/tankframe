@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
  * @Date 2021/12/27 13:53
  * @Version 1.0
  **/
-public class Explode {
+public class Explode extends GameObject{
     private int x, y;
     private int step=0;
     private BufferedImage[] explodes = ResourceMgr.explodes;
@@ -21,11 +21,11 @@ public class Explode {
         this.y = y;
         this.gameModel = gameModel;
     }
-
+@Override
     public void paint(Graphics g){
         g.drawImage(explodes[step++],x,y,null);
         if(step>explodes.length-1){
-            gameModel.explodes.remove(this);
+            gameModel.objects.remove(this);
             step =0;
       }
     }

@@ -2,7 +2,7 @@ package com.company;
 
 import java.awt.*;
 
-public class Bullet {
+public class Bullet extends GameObject {
 
     private int x, y;
     private final int width=ResourceMgr.bulletL.getWidth();
@@ -55,9 +55,10 @@ public class Bullet {
         this.group = group;
         this.gameModel =gameModel;
     }
+    @Override
     public void paint(Graphics g){
         if(!isLiving){
-            this.gameModel.bullets.remove(this);
+            this.gameModel.objects.remove(this);
         }
         switch (dir){
             case LEFT:
@@ -110,7 +111,7 @@ public class Bullet {
                 this.isLiving =false;
                 tank.setLiving(false);
                 Explode explode = new Explode(tank.getX(),tank.getY(),gameModel);
-                gameModel.explodes.add(explode);
+                gameModel.objects.add(explode);
             };
         }
     }
