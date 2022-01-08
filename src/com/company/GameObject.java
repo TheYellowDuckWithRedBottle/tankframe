@@ -10,6 +10,7 @@ import java.awt.*;
  * @Version 1.0
  **/
 public abstract class GameObject {
-    public int x,y;
+    public int x, y;
+
     public abstract void paint(Graphics g);
 }
