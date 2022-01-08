@@ -14,18 +14,18 @@ public class Explode {
     private int x, y;
     private int step=0;
     private BufferedImage[] explodes = ResourceMgr.explodes;
-    private TankFrame tf;
+    private GameModel gameModel;
 
-    public Explode(int x, int y, TankFrame tf) {
+    public Explode(int x, int y, GameModel gameModel) {
         this.x = x;
         this.y = y;
-        this.tf = tf;
+        this.gameModel = gameModel;
     }
 
     public void paint(Graphics g){
         g.drawImage(explodes[step++],x,y,null);
         if(step>explodes.length-1){
-            tf.explodes.remove(this);
+            gameModel.explodes.remove(this);
             step =0;
       }
     }

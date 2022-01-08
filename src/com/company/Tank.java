@@ -21,12 +21,8 @@ public class Tank {
     private Group group;
     private Random randomDir = new Random();
     private FireStrategy fireStrategy;
+    public GameModel gameModel;
 
-    public TankFrame getTankFrame() {
-        return tankFrame;
-    }
-
-    private TankFrame tankFrame;
 
     public int getX() {
         return x;
@@ -76,7 +72,7 @@ public class Tank {
             }
             move();
         }else{
-                this.tankFrame.tanks.remove(this);
+                this.gameModel.tanks.remove(this);
             return;
         }
 
@@ -112,19 +108,19 @@ public class Tank {
     }
 
     private void checkBround() {
-        if(this.x<tankFrame.getX()) {
-            x =tankFrame.getX();
-        } else if(this.x>tankFrame.getWidth()+tankFrame.getX()-this.width) {
-            x = tankFrame.getWidth()+tankFrame.getX()-this.width;
+        if(this.x<2) {
+            x =2;
+        } else if(this.x>TankFrame.GAME_WIDTH+this.width) {
+            x = TankFrame.GAME_WIDTH+this.width;
         }
-        if(this.y<tankFrame.getY()+30) {
-            y=tankFrame.getY()+30;
-        } else if(this.y>tankFrame.getHeight()+tankFrame.getY()-this.height) {
-            y = tankFrame.getHeight()+tankFrame.getY()-this.height;
+        if(this.y<30) {
+            y=30;
+        } else if(this.y>TankFrame.GAME_HEIGHT-this.height) {
+            y = TankFrame.GAME_HEIGHT-this.height;
         }
     }
 
-    public Tank(int x, int y,Group group ,TankFrame tf) {
+    public Tank(int x, int y,Group group ,GameModel gm) {
         this.x = x;
         this.y = y;
         this.group =group;
@@ -134,7 +130,7 @@ public class Tank {
         }else{
             fireStrategy = new DefaultFireStrategy();
         }
-        this.tankFrame =tf;
+        this.gameModel =gm;
     }
 
     private Bullet ComputeButtlePos(Bullet bullet){
@@ -149,7 +145,7 @@ public class Tank {
 //        bullet = ComputeButtlePos(bullet);
 //        tankFrame.bullets.add(bullet);
         fireStrategy.Fire(this);
-        System.out.println("字单数量"+tankFrame.bullets.size());
-        System.out.println("字单数量"+tankFrame.explodes.size());
+        System.out.println("字单数量"+gameModel.bullets.size());
+        System.out.println("字单数量"+gameModel.explodes.size());
     }
 }

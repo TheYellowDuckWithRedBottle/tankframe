@@ -11,7 +11,7 @@ public class Bullet {
     private Dir dir = Dir.DOWN;
     private boolean isLiving = true;
     private Group group;
-    private TankFrame tankFrame;
+    private GameModel gameModel;
 
     public int getX() {
         return x;
@@ -48,16 +48,16 @@ public class Bullet {
     public void setDir(Dir dir) {
         this.dir = dir;
     }
-    public Bullet(Dir dir, int x, int y,Group group,TankFrame tankFrame) {
+    public Bullet(Dir dir, int x, int y,Group group,GameModel gameModel) {
         this.dir = dir;
         this.x = x;
         this.y = y;
         this.group = group;
-        this.tankFrame =tankFrame;
+        this.gameModel =gameModel;
     }
     public void paint(Graphics g){
         if(!isLiving){
-            this.tankFrame.bullets.remove(this);
+            this.gameModel.bullets.remove(this);
         }
         switch (dir){
             case LEFT:
@@ -109,8 +109,8 @@ public class Bullet {
             if(bulletRec.intersects(tankRec)){
                 this.isLiving =false;
                 tank.setLiving(false);
-                Explode explode = new Explode(tank.getX(),tank.getY(),tankFrame);
-                tankFrame.explodes.add(explode);
+                Explode explode = new Explode(tank.getX(),tank.getY(),gameModel);
+                gameModel.explodes.add(explode);
             };
         }
     }
