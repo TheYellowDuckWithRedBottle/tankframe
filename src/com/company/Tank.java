@@ -17,9 +17,6 @@ public class Tank extends GameObject {
     public void setY(int y) {
         this.y = y;
     }
-
-    private int x;
-    private int y;
     public int oldX;
     public int oldY;
     private int width = ResourceMgr.tankL.getWidth(),
@@ -31,8 +28,6 @@ public class Tank extends GameObject {
     private Group group;
     private Random randomDir = new Random();
     private FireStrategy fireStrategy;
-    public GameModel gameModel;
-
 
     public int getX() {
         return x;
@@ -92,7 +87,7 @@ public class Tank extends GameObject {
             }
             move();
         } else {
-            this.gameModel.objects.remove(this);
+            GameModel.getInstance().objects.remove(this);
             return;
         }
 
@@ -133,8 +128,8 @@ public class Tank extends GameObject {
     private void checkBround() {
         if (this.x < 2) {
             x = 2;
-        } else if (this.x > TankFrame.GAME_WIDTH + this.width) {
-            x = TankFrame.GAME_WIDTH + this.width;
+        } else if (this.x > TankFrame.GAME_WIDTH - this.width) {
+            x = TankFrame.GAME_WIDTH - this.width;
         }
         if (this.y < 30) {
             y = 30;
@@ -153,7 +148,6 @@ public class Tank extends GameObject {
         } else {
             fireStrategy = new DefaultFireStrategy();
         }
-        this.gameModel = gm;
     }
 
     private Bullet ComputeButtlePos(Bullet bullet) {

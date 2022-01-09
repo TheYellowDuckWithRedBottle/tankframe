@@ -1,6 +1,7 @@
 package com.company.bulletStrategy;
 
 import com.company.Bullet;
+import com.company.GameModel;
 import com.company.Tank;
 
 /**
@@ -13,11 +14,11 @@ import com.company.Tank;
 public class DefaultFireStrategy implements FireStrategy {
     @Override
     public void Fire(Tank tank) {
-        Bullet bullet = new Bullet(tank.getDir(),tank.getX(),tank.getY(),tank.getGroup(),tank.gameModel);
+        Bullet bullet = new Bullet(tank.getDir(),tank.getX(),tank.getY(),tank.getGroup());
         int x =(int)(tank.getWidth()/2-bullet.getWidth()/2+bullet.getX());
         int y = (int)(tank.getHeight()/2-bullet.getHeight()/2+bullet.getY());
         bullet.setX(x);
         bullet.setY(y);
-        tank.gameModel.objects.add(bullet);
+        GameModel.getInstance().objects.add(bullet);
     }
 }

@@ -1,9 +1,6 @@
 package com.company.Collide;
 
-import com.company.Bullet;
-import com.company.Explode;
-import com.company.GameObject;
-import com.company.Tank;
+import com.company.*;
 
 import java.awt.*;
 
@@ -26,8 +23,8 @@ public class TankBulletCollider implements Collider {
                 if(bulletRec.intersects(tankRec)){
                     bullet.setLiving(false);
                     tank.setLiving(false);
-                    Explode explode = new Explode(tank.getX(),tank.getY(),tank.gameModel);
-                    tank.gameModel.objects.add(explode);
+                    Explode explode = new Explode(tank.getX(),tank.getY());
+                    GameModel.getInstance().objects.add(explode);
                     return false;
                 };
             }
@@ -41,8 +38,8 @@ public class TankBulletCollider implements Collider {
                 if(bulletRec.intersects(tankRec)){
                     bullet.setLiving(false);
                     tank.setLiving(false);
-                    Explode explode = new Explode(tank.getX(),tank.getY(),tank.gameModel);
-                    tank.gameModel.objects.add(explode);
+                    Explode explode = new Explode(tank.getX(),tank.getY());
+                    GameModel.getInstance().objects.add(explode);
                     return false;
                 };
             }

@@ -24,6 +24,7 @@ public class GameModel {
     public List<GameObject> objects = new ArrayList<>();
     Tank tank = new Tank(200, 200, Group.GOOD, this);
     ColliderChain colliderChain = new ColliderChain();
+
     private static final GameModel INSTANCE = new GameModel();
     public static GameModel getInstance() {
         return INSTANCE;

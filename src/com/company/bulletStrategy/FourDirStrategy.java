@@ -2,6 +2,7 @@ package com.company.bulletStrategy;
 
 import com.company.Bullet;
 import com.company.Dir;
+import com.company.GameModel;
 import com.company.Tank;
 
 /**
@@ -16,12 +17,12 @@ public class FourDirStrategy implements FireStrategy{
     public void Fire(Tank tank) {
         Dir[] dirs= Dir.values();
         for(Dir dir:dirs){
-            Bullet bullet = new Bullet(dir,tank.getX(),tank.getY(),tank.getGroup(),tank.gameModel);
+            Bullet bullet = new Bullet(dir,tank.getX(),tank.getY(),tank.getGroup());
             int x =(int)(tank.getWidth()/2-bullet.getWidth()/2+bullet.getX());
             int y = (int)(tank.getHeight()/2-bullet.getHeight()/2+bullet.getY());
             bullet.setX(x);
             bullet.setY(y);
-            tank.gameModel.objects.add(bullet);
+            GameModel.getInstance().objects.add(bullet);
         }
     }
 }

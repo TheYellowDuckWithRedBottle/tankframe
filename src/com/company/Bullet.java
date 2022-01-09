@@ -7,18 +7,16 @@ public class Bullet extends GameObject {
     private final int width = ResourceMgr.bulletL.getWidth();
     private final int height = ResourceMgr.bulletL.getHeight();
     private final int Speed = 8;
-    private int x, y;
     private Dir dir = Dir.DOWN;
     private boolean isLiving = true;
     private Group group;
-    private GameModel gameModel;
 
-    public Bullet(Dir dir, int x, int y, Group group, GameModel gameModel) {
+    public Bullet(Dir dir, int x, int y, Group group) {
         this.dir = dir;
         this.x = x;
         this.y = y;
         this.group = group;
-        this.gameModel = gameModel;
+
     }
 
     public Group getGroup() {
@@ -68,7 +66,7 @@ public class Bullet extends GameObject {
     @Override
     public void paint(Graphics g) {
         if (!isLiving) {
-            this.gameModel.objects.remove(this);
+            GameModel.getInstance().objects.remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -122,8 +120,8 @@ public class Bullet extends GameObject {
             if (bulletRec.intersects(tankRec)) {
                 this.isLiving = false;
                 tank.setLiving(false);
-                Explode explode = new Explode(tank.getX(), tank.getY(), gameModel);
-                gameModel.objects.add(explode);
+                Explode explode = new Explode(tank.getX(), tank.getY());
+                GameModel.getInstance().objects.add(explode);
             }
             ;
         }
