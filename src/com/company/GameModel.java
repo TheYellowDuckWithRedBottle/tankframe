@@ -30,13 +30,14 @@ public class GameModel {
         return INSTANCE;
     }
     private GameModel() {
-        for (var i = 1; i < 7; i++) {
+        for (var i = 1; i < 2; i++) {
             objects.add(new Tank(i * 100, i * 100, Group.BAD, this));
         }
-        objects.add(new Wall(500,100,30,300));
-        objects.add(new Wall(600,100,30,300));
-        objects.add(new Wall(700,100,30,300));
-        objects.add(new Wall(800,100,30,300));
+        objects.add(tank);
+        objects.add(new Wall(500,100));
+        objects.add(new Wall(600,100));
+        objects.add(new Wall(700,100));
+        objects.add(new Wall(800,100));
     }
     public void add(GameObject gm){
         this.objects.add(gm);
@@ -45,7 +46,7 @@ public class GameModel {
         this.objects.remove(gm);
     }
     public void paint(Graphics g) {
-        tank.paint(g);
+        //tank.paint(g);
         for (int i = 0; i < objects.size(); i++) {
             objects.get(i).paint(g);
         }
@@ -56,16 +57,6 @@ public class GameModel {
                 colliderChain.collide(object1,object2);
             }
         }
-//        for(int i =0;i<tanks.size();i++){
-//            objects.get(i).paint(g);
-//        }
-//        for(var i =0;i<bullets.size();i++){
-//            for(var j=0;j<tanks.size();j++){
-//                bullets.get(i).collideWithTank(tanks.get(j));
-//            }
-//        }
-//        for(var i =0;i<explodes.size();i++){
-//            explodes.get(i).paint(g);
-//        }
+
     }
 }

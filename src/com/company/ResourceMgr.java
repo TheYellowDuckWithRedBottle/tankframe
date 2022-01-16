@@ -11,6 +11,9 @@ public class ResourceMgr {
     public static BufferedImage bulletL,bulletR,bulletU,bulletD;
     public static BufferedImage badTankL,badTankR,badTankU,badTankD;
     public static BufferedImage[] explodes=new BufferedImage[17];
+    public static BufferedImage wall;
+    public static BufferedImage stell;
+    public static BufferedImage grass;
 
     static{
         try {
@@ -29,6 +32,10 @@ public class ResourceMgr {
             bulletL = ImageUtility.RotateImage(bulletU,-90);
             bulletR = ImageUtility.RotateImage(bulletU,90);
             bulletD = ImageUtility.RotateImage(bulletU,180);
+
+            wall = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\walls.gif"));
+            stell = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\steels.gif"));
+            grass = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\grass.png"));
 
             for(var i =1;i<17;i++){
                 explodes[i]=ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\e"+i+".gif"));

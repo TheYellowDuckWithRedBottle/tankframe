@@ -144,7 +144,7 @@ public class Tank extends GameObject {
         this.group = group;
         if (group == Group.GOOD) {
             moving = false;
-            fireStrategy = new FourDirStrategy();
+            fireStrategy = new DefaultFireStrategy();
         } else {
             fireStrategy = new DefaultFireStrategy();
         }

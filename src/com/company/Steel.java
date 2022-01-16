@@ -6,13 +6,13 @@ import java.awt.*;
  * @ClassName
  * @Description TODO
  * @Author LeviFan
- * @Date 2022/1/8 22:21
+ * @Date 2022/1/16 18:02
  * @Version 1.0
  **/
-public class Wall extends GameObject {
+public class Steel extends GameObject {
     public int width,height;
 
-    public Wall(int x, int y) {
+    public Steel(int x, int y) {
         this.x=x;
         this.y=y;
         this.width = ResourceMgr.wall.getWidth();
@@ -22,7 +22,7 @@ public class Wall extends GameObject {
     @Override
     public void paint(Graphics g) {
         //g.fillRect(x,y,width,height);
-        g.drawImage(ResourceMgr.wall,x,y,null);
+        g.drawImage(ResourceMgr.stell,x,y,null);
 
     }
 }
