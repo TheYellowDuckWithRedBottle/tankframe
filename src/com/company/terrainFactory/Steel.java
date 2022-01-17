@@ -1,4 +1,7 @@
-package com.company;
+package com.company.terrainFactory;
+
+import com.company.GameObject;
+import com.company.ResourceMgr;
 
 import java.awt.*;
 
@@ -9,14 +12,14 @@ import java.awt.*;
  * @Date 2022/1/16 18:02
  * @Version 1.0
  **/
-public class Steel extends GameObject {
+public class Steel extends Terrain {
     public int width,height;
 
     public Steel(int x, int y) {
         this.x=x;
         this.y=y;
-        this.width = ResourceMgr.wall.getWidth();
-        this.height = ResourceMgr.wall.getHeight();
+        this.width = ResourceMgr.stell.getWidth();
+        this.height = ResourceMgr.stell.getHeight();
     }
 
     @Override

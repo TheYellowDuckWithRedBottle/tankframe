@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.terrainFactory.Terrain;
+
 import java.awt.*;
 
 /**
@@ -9,7 +11,7 @@ import java.awt.*;
  * @Date 2022/1/8 22:21
  * @Version 1.0
  **/
-public class Wall extends GameObject {
+public class Wall extends Terrain {
     public int width,height;
 
     public Wall(int x, int y) {

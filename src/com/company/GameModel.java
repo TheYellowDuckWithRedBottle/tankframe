@@ -4,6 +4,7 @@ import com.company.Collide.Collider;
 import com.company.Collide.ColliderChain;
 import com.company.Collide.TankBulletCollider;
 import com.company.Collide.TankTankCollider;
+import com.company.terrainFactory.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -34,10 +35,23 @@ public class GameModel {
             objects.add(new Tank(i * 100, i * 100, Group.BAD, this));
         }
         objects.add(tank);
-        objects.add(new Wall(500,100));
-        objects.add(new Wall(600,100));
-        objects.add(new Wall(700,100));
-        objects.add(new Wall(800,100));
+        CreateTerrain createTerrain = new SteelFactory();
+        List<Terrain> terrains= createTerrain.CreateTerrain(500,100,Dir.LEFT,5);
+        CreateTerrain createWall =new WallFactory();
+        List<Terrain> walls = createWall.CreateTerrain(600,100,Dir.RIGHT,10);
+        for (var i =0;i<terrains.size();i++){
+            objects.add(terrains.get(i));
+        }
+        for (var i =0;i<walls.size();i++){
+            objects.add(walls.get(i));
+        }
+
+
+
+//        objects.add(new Wall(500,100));
+//        objects.add(new Wall(600,100));
+//        objects.add(new Wall(700,100));
+//        objects.add(new Wall(800,100));
     }
     public void add(GameObject gm){
         this.objects.add(gm);
