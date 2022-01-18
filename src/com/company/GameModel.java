@@ -4,6 +4,7 @@ import com.company.Collide.Collider;
 import com.company.Collide.ColliderChain;
 import com.company.Collide.TankBulletCollider;
 import com.company.Collide.TankTankCollider;
+import com.company.props.Pantacle;
 import com.company.terrainFactory.*;
 
 import java.awt.*;
@@ -45,7 +46,7 @@ public class GameModel {
         for (var i =0;i<walls.size();i++){
             objects.add(walls.get(i));
         }
-
+        objects.add(new Pantacle());
 
 
 //        objects.add(new Wall(500,100));

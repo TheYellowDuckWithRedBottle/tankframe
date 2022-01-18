@@ -19,15 +19,15 @@ public class Tank extends GameObject {
     }
     public int oldX;
     public int oldY;
-    private int width = ResourceMgr.tankL.getWidth(),
-            height = ResourceMgr.tankL.getHeight();
+    public int width = ResourceMgr.tankL.getWidth();
+    public int height = ResourceMgr.tankL.getHeight();
     private boolean isLiving = true;
     private final int Speed = 5;
     private Dir dir = Dir.UP;
     private boolean moving = true;
     private Group group;
     private Random randomDir = new Random();
-    private FireStrategy fireStrategy;
+    public FireStrategy fireStrategy;
 
     public int getX() {
         return x;

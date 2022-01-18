@@ -14,6 +14,9 @@ public class ResourceMgr {
     public static BufferedImage wall;
     public static BufferedImage stell;
     public static BufferedImage grass;
+    public static BufferedImage pantacel;
+    public static BufferedImage timer;
+    public static BufferedImage bomb;
 
     static{
         try {
@@ -36,6 +39,10 @@ public class ResourceMgr {
             wall = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\walls.gif"));
             stell = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\steels.gif"));
             grass = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\grass.png"));
+
+            pantacel= ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\star.gif"));
+            timer= ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\timer.gif"));
+            bomb =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\bomb.gif"));
 
             for(var i =1;i<17;i++){
                 explodes[i]=ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\e"+i+".gif"));
