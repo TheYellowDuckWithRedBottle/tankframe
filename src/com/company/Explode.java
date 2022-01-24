@@ -1,26 +1,30 @@
 package com.company;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
-public class Explode {
-    private int x,y;
-    private int width=ResourceMgr.explores[0].getWidth(),
-                heigth =ResourceMgr.explores[0].getHeight();
-    private TankFrame tf;
-    private int step=0;
+/**
+ * @ClassName
+ * @Description TODO
+ * @Author LeviFan
+ * @Date 2021/12/27 13:53
+ * @Version 1.0
+ **/
+public class Explode extends GameObject {
+    private int step = 0;
+    private BufferedImage[] explodes = ResourceMgr.explodes;
 
-    public Explode(int x, int y, TankFrame tf) {
+    public Explode(int x, int y) {
         this.x = x;
         this.y = y;
-        this.tf = tf;
-    }
-    public void paint(Graphics g){
-            g.drawImage(ResourceMgr.explores[step++],x,y,null);
-            if(step>=ResourceMgr.explores.length){
-                this.tf.explodes.remove(this);
-                step =0;
-            }
-
     }
 
+    @Override
+    public void paint(Graphics g) {
+        g.drawImage(explodes[step++], x, y, null);
+        if (step > explodes.length - 1) {
+            GameModel.getInstance().objects.remove(this);
+            step = 0;
+        }
+    }
 }

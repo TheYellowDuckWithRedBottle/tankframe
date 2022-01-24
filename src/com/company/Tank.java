@@ -1,12 +1,33 @@
 package com.company;
 
+import com.company.bulletStrategy.DefaultFireStrategy;
+import com.company.bulletStrategy.FireStrategy;
+import com.company.bulletStrategy.FourDirStrategy;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class Tank {
-    private int x;
+public class Tank extends GameObject {
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+    public int oldX;
+    public int oldY;
+    public int width = ResourceMgr.tankL.getWidth();
+    public int height = ResourceMgr.tankL.getHeight();
+    private boolean isLiving = true;
+    private final int Speed = 5;
+    private Dir dir = Dir.UP;
+    private boolean moving = true;
+    private Group group;
+    private Random randomDir = new Random();
+    public FireStrategy fireStrategy;
 
     public int getX() {
         return x;
@@ -16,8 +37,6 @@ public class Tank {
         return y;
     }
 
-    private int y;
-
     public int getWidth() {
         return width;
     }
@@ -26,119 +45,123 @@ public class Tank {
         return height;
     }
 
-    private int width=ResourceMgr.goodTankL.getWidth(),
-            height=ResourceMgr.goodTankL.getHeight();
-
     public void setLiving(boolean living) {
         isLiving = living;
     }
-
-    private boolean isLiving =true;
-    private final int Speed = 4;
-    private Dir dir=Dir.UP;
-    private boolean moving;
-    private TankFrame tankFrame;
 
     public Group getGroup() {
         return group;
     }
 
-    private Group group;
-    private Random random = new Random();
-
     public Dir getDir() {
         return dir;
     }
+
     public void setDir(Dir dir) {
         this.dir = dir;
     }
+
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
 
-    public void paint(Graphics g){
-        if(this.isLiving){
-            switch (dir){
+    @Override
+    public void paint(Graphics g) {
+
+        if (this.isLiving) {
+            switch (dir) {
                 case LEFT:
-                    g.drawImage(this.group ==Group.GOOD?ResourceMgr.goodTankL:ResourceMgr.badTankL,x,y,null);
+                    g.drawImage(group == Group.GOOD ? ResourceMgr.tankL : ResourceMgr.badTankL, x, y, null);
                     break;
                 case RIGHT:
-                    g.drawImage(this.group ==Group.GOOD?ResourceMgr.goodTankR:ResourceMgr.badTankR,x,y,null);
+                    g.drawImage(group == Group.GOOD ? ResourceMgr.tankR : ResourceMgr.badTankR, x, y, null);
                     break;
                 case UP:
-                    g.drawImage(this.group ==Group.GOOD?ResourceMgr.goodTankU:ResourceMgr.badTankU,x,y,null);
+                    g.drawImage(group == Group.GOOD ? ResourceMgr.tankU : ResourceMgr.badTankU, x, y, null);
                     break;
                 case DOWN:
-                    g.drawImage(this.group ==Group.GOOD?ResourceMgr.goodTankD:ResourceMgr.badTankD,x,y,null);
+                    g.drawImage(group == Group.GOOD ? ResourceMgr.tankD : ResourceMgr.badTankD, x, y, null);
                     break;
                 default:
                     break;
             }
             move();
-        }else{
-                this.tankFrame.tanks.remove(this);
+        } else {
+            GameModel.getInstance().objects.remove(this);
             return;
         }
-        if(group==Group.BAD&&(random.nextInt(100)>95)){
-            dir=RandomDir();
-        }
-        boundCheck();
+
     }
 
-    private void boundCheck() {
-        if(x<0) x=0;
-        else if(x>TankFrame.GAME_WIDTH-this.width) x=TankFrame.GAME_WIDTH-this.width;
-        if(y<30) y=30;
-        else if(y>TankFrame.GAME_HEIGHT-this.height) y=TankFrame.GAME_HEIGHT-this.height;
-    }
-
-    private Dir RandomDir(){
-       return Dir.values()[random.nextInt(4)];
-    }
-    private void move(){
-        if(!moving) return;
-        switch (dir){
+    private void move() {
+        oldX = this.x;
+        oldY = this.y;
+        if (!moving) return;
+        switch (dir) {
             case LEFT:
-                x-=Speed;
+                x -= Speed;
                 break;
             case RIGHT:
-                x+=Speed;
+                x += Speed;
                 break;
             case UP:
-                y-=Speed;
+                y -= Speed;
                 break;
             case DOWN:
-                y+=Speed;
+                y += Speed;
                 break;
             default:
                 break;
         }
-        if(Group.BAD==group&&random.nextInt(100)>95){
+        if (group == Group.BAD && randomDir.nextInt(100) > 95) {
+            this.setDir(GenerateRandomDir());
             this.fire();
+        }
+        checkBround();
+    }
+
+    public Dir GenerateRandomDir() {
+        Dir[] dirs = Dir.values();
+        return dirs[randomDir.nextInt(4)];
+    }
+
+    private void checkBround() {
+        if (this.x < 2) {
+            x = 2;
+        } else if (this.x > TankFrame.GAME_WIDTH - this.width) {
+            x = TankFrame.GAME_WIDTH - this.width;
+        }
+        if (this.y < 30) {
+            y = 30;
+        } else if (this.y > TankFrame.GAME_HEIGHT - this.height) {
+            y = TankFrame.GAME_HEIGHT - this.height;
         }
     }
 
-    public Tank(int x, int y,Group group ,TankFrame tf) {
+    public Tank(int x, int y, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
-        this.group =group;
-        this.tankFrame =tf;
-        this.moving =true;
+        this.group = group;
+        if (group == Group.GOOD) {
+            moving = false;
+            fireStrategy = new DefaultFireStrategy();
+        } else {
+            fireStrategy = new DefaultFireStrategy();
+        }
     }
 
-    private Bullet ComputeButtlePos(Bullet bullet){
-        int x =(int)(width/2-bullet.getWidth()/2+bullet.getX());
-        int y = (int)(height/2-bullet.getHeight()/2+bullet.getY());
+    private Bullet ComputeButtlePos(Bullet bullet) {
+        int x = (int) (width / 2 - bullet.getWidth() / 2 + bullet.getX());
+        int y = (int) (height / 2 - bullet.getHeight() / 2 + bullet.getY());
         bullet.setX(x);
         bullet.setY(y);
         return bullet;
     }
 
     public void fire() {
-        Bullet bullet = new Bullet(this.dir,this.x,this.y,this.group,this.tankFrame);
-        ComputeButtlePos(bullet);
-        tankFrame.bullets.add(bullet);
-        System.out.println("字单数量"+tankFrame.bullets.size());
-        System.out.println("字单数量"+tankFrame.tank);
+//        Bullet bullet = new Bullet(this.dir,this.x,this.y,this.group,this.tankFrame);
+//        bullet = ComputeButtlePos(bullet);
+//        tankFrame.bullets.add(bullet);
+        fireStrategy.Fire(this);
     }
 }

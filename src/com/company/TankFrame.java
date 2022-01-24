@@ -7,13 +7,8 @@ import java.util.ArrayList;
 import   java.util.List;
 
 public class TankFrame extends Frame {
-   public static int GAME_WIDTH = 1200,GAME_HEIGHT=800;
-    Tank tank = new Tank(200,200,Group.GOOD,this);
-
-    List<Bullet> bullets=new ArrayList<>();
-    List<Tank> tanks = new ArrayList<>();
-    List<Explode> explodes = new ArrayList<>();
-
+    public static int GAME_WIDTH = 1500,GAME_HEIGHT=1000;
+    GameModel gm = GameModel.getInstance();
     public TankFrame() throws HeadlessException {
         setSize(GAME_WIDTH,GAME_HEIGHT);
         setResizable(false);
@@ -25,22 +20,7 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        tank.paint(g);
-        for(int i=0;i<bullets.size();i++){
-            bullets.get(i).paint(g);
-        }
-        for(int i =0;i<tanks.size();i++){
-            tanks.get(i).paint(g);
-        }
-        for(var i =0;i<bullets.size();i++){
-            for(var j=0;j<tanks.size();j++){
-                bullets.get(i).collideWithTank(tanks.get(j));
-            }
-        }
-        for(var i =0;i<explodes.size();i++){
-            explodes.get(i).paint(g);
-        }
-
+        gm.paint(g);
     }
     Image offsetScreenImage = null;
 
@@ -90,13 +70,13 @@ public class TankFrame extends Frame {
 
         private void setTankDirection() {
             if(!LEFT&&!RIGHT&&!UP&&!DOWN){
-                tank.setMoving(false);
+                gm.tank.setMoving(false);
             }else{
-                tank.setMoving(true);
-                if(LEFT) tank.setDir(Dir.LEFT);
-                if(RIGHT) tank.setDir(Dir.RIGHT);
-                if(UP) tank.setDir(Dir.UP);
-                if(DOWN) tank.setDir(Dir.DOWN);
+                gm.tank.setMoving(true);
+                if(LEFT) gm.tank.setDir(Dir.LEFT);
+                if(RIGHT) gm.tank.setDir(Dir.RIGHT);
+                if(UP) gm.tank.setDir(Dir.UP);
+                if(DOWN) gm.tank.setDir(Dir.DOWN);
             }
         }
 
@@ -117,7 +97,7 @@ public class TankFrame extends Frame {
                     RIGHT = false;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    tank.fire();
+                    gm.tank.fire();
                 default:
                     break;
             }
