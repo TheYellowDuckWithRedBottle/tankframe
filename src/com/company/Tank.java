@@ -10,19 +10,13 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Tank extends GameObject {
-    public void setX(int x) {
-        this.x = x;
-    }
 
-    public void setY(int y) {
-        this.y = y;
-    }
     public int oldX;
     public int oldY;
     public int width = ResourceMgr.tankL.getWidth();
     public int height = ResourceMgr.tankL.getHeight();
     private boolean isLiving = true;
-    private final int Speed = 5;
+    private final int Speed = 10;
     private Dir dir = Dir.UP;
     private boolean moving = true;
     private Group group;
@@ -59,6 +53,13 @@ public class Tank extends GameObject {
 
     public void setDir(Dir dir) {
         this.dir = dir;
+    }
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public void setMoving(boolean moving) {
@@ -124,6 +125,11 @@ public class Tank extends GameObject {
         Dir[] dirs = Dir.values();
         return dirs[randomDir.nextInt(4)];
     }
+    private void freeze(){
+        this.x=oldX;
+        this.y=oldY;
+    }
+
 
     private void checkBround() {
         if (this.x < 2) {

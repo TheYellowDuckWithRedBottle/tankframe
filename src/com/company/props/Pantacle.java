@@ -19,7 +19,7 @@ import java.util.Random;
 public class Pantacle extends Prop {
 
     public Pantacle() {
-         x = randomPos.nextInt(TankFrame.GAME_WIDTH);
+        x = randomPos.nextInt(TankFrame.GAME_WIDTH);
          y = randomPos.nextInt(TankFrame.GAME_HEIGHT);
          width = ResourceMgr.pantacel.getWidth();
          heigh =ResourceMgr.pantacel.getHeight();

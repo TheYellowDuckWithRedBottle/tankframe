@@ -6,7 +6,12 @@ public class Bullet extends GameObject {
 
     private final int width = ResourceMgr.bulletL.getWidth();
     private final int height = ResourceMgr.bulletL.getHeight();
-    private final int Speed = 8;
+
+    public void setSpeed(int speed) {
+        Speed = speed;
+    }
+
+    private  int Speed = 5;
     private Dir dir = Dir.DOWN;
     private boolean isLiving = true;
     private Group group;

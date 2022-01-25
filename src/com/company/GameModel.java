@@ -5,6 +5,7 @@ import com.company.Collide.ColliderChain;
 import com.company.Collide.TankBulletCollider;
 import com.company.Collide.TankTankCollider;
 import com.company.props.Pantacle;
+import com.company.props.Prop;
 import com.company.terrainFactory.*;
 
 import java.awt.*;
@@ -46,9 +47,9 @@ public class GameModel {
         for (var i =0;i<walls.size();i++){
             objects.add(walls.get(i));
         }
-        objects.add(new Pantacle());
-
-
+        //objects.add(new Pantacle());
+        Prop prop= new Prop();
+        objects.add(prop);
 //        objects.add(new Wall(500,100));
 //        objects.add(new Wall(600,100));
 //        objects.add(new Wall(700,100));
@@ -56,6 +57,26 @@ public class GameModel {
     }
     public void add(GameObject gm){
         this.objects.add(gm);
+    }
+    public void destroyEmeryTanks(){
+        for(var i =0;i<objects.size();i++){
+            if(objects.get(i) instanceof Tank){
+                Tank tank = (Tank)objects.get(i);
+                if(tank.getGroup()==Group.BAD){
+                    objects.remove(i);
+                }
+            }
+        }
+    }
+    public void freezeEmeryTanks(){
+        for(var i =0;i<objects.size();i++){
+            if(objects.get(i) instanceof Tank){
+                Tank tank = (Tank)objects.get(i);
+                if(tank.getGroup()==Group.BAD){
+                    tank.setMoving(false);
+                }
+            }
+        }
     }
     public void remove(GameObject gm){
         this.objects.remove(gm);
