@@ -36,7 +36,8 @@ public class GameModel {
         for (var i = 1; i < 2; i++) {
             objects.add(new Tank(i * 100, i * 100, Group.BAD, this));
         }
-        objects.add(tank);
+        objects.add(tank);//添加坦克
+        objects.add(Home.getInstance());//添加老窝
         CreateTerrain createTerrain = new SteelFactory();
         List<Terrain> terrains= createTerrain.CreateTerrain(500,100,Dir.LEFT,5);
         CreateTerrain createWall =new WallFactory();
@@ -47,13 +48,9 @@ public class GameModel {
         for (var i =0;i<walls.size();i++){
             objects.add(walls.get(i));
         }
-        //objects.add(new Pantacle());
         Prop prop= new Prop();
         objects.add(prop);
-//        objects.add(new Wall(500,100));
-//        objects.add(new Wall(600,100));
-//        objects.add(new Wall(700,100));
-//        objects.add(new Wall(800,100));
+
     }
     public void add(GameObject gm){
         this.objects.add(gm);

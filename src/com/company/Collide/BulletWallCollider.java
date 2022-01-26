@@ -1,7 +1,5 @@
 package com.company.Collide;
-
 import com.company.*;
-
 import java.awt.*;
 
 /**

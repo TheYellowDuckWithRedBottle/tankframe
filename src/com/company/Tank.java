@@ -16,7 +16,7 @@ public class Tank extends GameObject {
     public int width = ResourceMgr.tankL.getWidth();
     public int height = ResourceMgr.tankL.getHeight();
     private boolean isLiving = true;
-    private final int Speed = 10;
+    private final int Speed = 5;
     private Dir dir = Dir.UP;
     private boolean moving = true;
     private Group group;

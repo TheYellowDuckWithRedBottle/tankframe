@@ -11,6 +11,8 @@ public class ResourceMgr {
     public static BufferedImage bulletL,bulletR,bulletU,bulletD;
     public static BufferedImage badTankL,badTankR,badTankU,badTankD;
     public static BufferedImage[] explodes=new BufferedImage[17];
+    public static BufferedImage home;
+    public static BufferedImage homeDestroy;
     public static BufferedImage wall;
     public static BufferedImage stell;
     public static BufferedImage grass;
@@ -40,6 +42,9 @@ public class ResourceMgr {
             bulletR = ImageUtility.RotateImage(bulletU,90);
             bulletD = ImageUtility.RotateImage(bulletU,180);
 
+            home =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\home1.png"));
+            homeDestroy = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\home_destroyed.png"));
+
             wall = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\walls.gif"));
             stell = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\steels.gif"));
             grass = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\grass.png"));
@@ -50,6 +55,7 @@ public class ResourceMgr {
             gun =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\06.png"));
             life=ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\03.png"));
             shovel =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\02.png"));
+
             for(var i =1;i<17;i++){
                 explodes[i]=ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\e"+i+".gif"));
             }

@@ -23,6 +23,7 @@ public class ColliderChain implements Collider {
         colliderChains.add(new TankSteelCollide());
         colliderChains.add(new BulletSteelCollider());
         colliderChains.add(new TankPropCollider());
+        colliderChains.add(new BulletHomeCollider());
     }
     public void addCollider(Collider collider){
         this.colliderChains.add(collider);

@@ -10,7 +10,7 @@ public class Bullet extends GameObject {
     public void setSpeed(int speed) {
         Speed = speed;
     }
-
+    public Rectangle rect;
     private  int Speed = 5;
     private Dir dir = Dir.DOWN;
     private boolean isLiving = true;
@@ -21,6 +21,7 @@ public class Bullet extends GameObject {
         this.x = x;
         this.y = y;
         this.group = group;
+        rect = new Rectangle(x,y,width,height);
 
     }
 
