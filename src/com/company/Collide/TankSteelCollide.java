@@ -1,8 +1,7 @@
 package com.company.Collide;
 
-import com.company.GameObject;
-import com.company.Tank;
-import com.company.Wall;
+import com.company.model.GameObject;
+import com.company.model.Tank;
 import com.company.terrainFactory.Steel;
 
 import java.awt.*;

@@ -1,17 +1,14 @@
 package com.company.Collide;
 
 import com.company.GameModel;
-import com.company.GameObject;
-import com.company.Group;
-import com.company.Tank;
-import com.company.bulletStrategy.FourDirStrategy;
+import com.company.model.GameObject;
+import com.company.enums.Group;
+import com.company.model.Tank;
+import com.company.bulletStrategy.AttackWallStrategy;
 import com.company.bulletStrategy.SpeedFireStrategy;
-import com.company.props.Pantacle;
 import com.company.props.Prop;
-import com.company.props.PropType;
 
 import java.awt.*;
-import java.security.cert.TrustAnchor;
 
 /**
  * @ClassName
@@ -38,10 +35,18 @@ public class TankPropCollider implements Collider{
                         case Helmet:
                             break;
                         case Pantcle:
+                            tank.startNum ++;
+                            if(tank.startNum>2){
+                                tank.startNum=2;
+                            }
                             tank.fireStrategy = new SpeedFireStrategy();
                             break;
                         case Pistol:
-                            tank.fireStrategy = new FourDirStrategy();
+                            tank.startNum +=2;
+                            if(tank.startNum>2){
+                                tank.startNum=2;
+                            }
+                            tank.setFireStrategy();
                             break;
                         case Timer:
                             GameModel.getInstance().freezeEmeryTanks();
@@ -66,12 +71,21 @@ public class TankPropCollider implements Collider{
                             GameModel.getInstance().destroyEmeryTanks();
                             break;
                         case Helmet:
+                            tank.transform();
                             break;
                         case Pantcle:
-                            tank.fireStrategy = new SpeedFireStrategy();
+                            tank.startNum ++;
+                            if(tank.startNum>2){
+                                tank.startNum=2;
+                            }
+                            tank.setFireStrategy();
                             break;
                         case Pistol:
-                            tank.fireStrategy = new FourDirStrategy();
+                            tank.startNum +=2;
+                            if(tank.startNum>2){
+                                tank.startNum=2;
+                            }
+                            tank.setFireStrategy();
                             break;
                         case Timer:
                             GameModel.getInstance().freezeEmeryTanks();

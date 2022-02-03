@@ -1,5 +1,10 @@
 package com.company.Collide;
 import com.company.*;
+import com.company.model.Born;
+import com.company.model.Bullet;
+import com.company.model.GameObject;
+import com.company.terrainFactory.Wall;
+
 import java.awt.*;
 
 /**
@@ -18,7 +23,10 @@ public class BulletWallCollider implements Collider {
             Rectangle bulletRec = new Rectangle(bullet.getX(),bullet.getY(),bullet.getWidth(),bullet.getHeight());
             Rectangle wallRec =new Rectangle(wall.x,wall.y,wall.width,wall.height);
                 if(bulletRec.intersects(wallRec)){
+                    wall.disappear();
                     bullet.setLiving(false);
+                    Born born = new Born(bullet.x,bullet.y);
+                    GameModel.getInstance().add(born);
                     return false;
                 };
         }
@@ -28,7 +36,11 @@ public class BulletWallCollider implements Collider {
             Rectangle bulletRec = new Rectangle(bullet.getX(),bullet.getY(),bullet.getWidth(),bullet.getHeight());
             Rectangle wallRec =new Rectangle(wall.x,wall.y,wall.width,wall.height);
             if(bulletRec.intersects(wallRec)){
+                Born born = new Born(bullet.x,bullet.y);
+                GameModel.getInstance().add(born);
+                wall.disappear();
                 bullet.setLiving(false);
+
                 return false;
             };
         }

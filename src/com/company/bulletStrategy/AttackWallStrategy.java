@@ -8,15 +8,15 @@ import com.company.model.Tank;
  * @ClassName
  * @Description TODO
  * @Author LeviFan
- * @Date 2022/1/19 13:31
+ * @Date 2022/1/30 9:59
  * @Version 1.0
  **/
-public class SpeedFireStrategy implements FireStrategy{
+public class AttackWallStrategy implements FireStrategy {
     @Override
     public void Fire(Tank tank) {
         Bullet bullet = new Bullet(tank.getDir(),tank.getX(),tank.getY(),tank.getGroup());
-        bullet.Speed=15;
-        //GameObectDecorator bulletRecDecorator = new BulletTailDecorator(new BulletRecDecorator(bullet));
+        bullet.attackSteel = true;
+        bullet.Speed =20;
         int x =(int)(tank.getWidth()/2-bullet.getWidth()/2+bullet.getX());
         int y = (int)(tank.getHeight()/2-bullet.getHeight()/2+bullet.getY());
         bullet.setX(x);

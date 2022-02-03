@@ -1,6 +1,6 @@
 package com.company.terrainFactory;
 
-import com.company.Dir;
+import com.company.enums.Dir;
 
 import java.util.List;
 

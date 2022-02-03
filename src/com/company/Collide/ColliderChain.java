@@ -1,6 +1,6 @@
 package com.company.Collide;
 
-import com.company.GameObject;
+import com.company.model.GameObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,7 @@ public class ColliderChain implements Collider {
         colliderChains.add(new TankSteelCollide());
         colliderChains.add(new BulletSteelCollider());
         colliderChains.add(new TankPropCollider());
+        colliderChains.add(new TankHomeCollider());
         colliderChains.add(new BulletHomeCollider());
     }
     public void addCollider(Collider collider){

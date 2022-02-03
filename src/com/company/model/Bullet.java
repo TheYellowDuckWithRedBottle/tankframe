@@ -1,4 +1,10 @@
-package com.company;
+package com.company.model;
+
+import com.company.GameModel;
+import com.company.TankFrame;
+import com.company.enums.Dir;
+import com.company.enums.Group;
+import com.company.mediaLoad.ResourceMgr;
 
 import java.awt.*;
 
@@ -7,14 +13,13 @@ public class Bullet extends GameObject {
     private final int width = ResourceMgr.bulletL.getWidth();
     private final int height = ResourceMgr.bulletL.getHeight();
 
-    public void setSpeed(int speed) {
-        Speed = speed;
-    }
     public Rectangle rect;
-    private  int Speed = 5;
+    public int Speed = 10;
+    public boolean attackSteel = false;
     private Dir dir = Dir.DOWN;
     private boolean isLiving = true;
     private Group group;
+
 
     public Bullet(Dir dir, int x, int y, Group group) {
         this.dir = dir;

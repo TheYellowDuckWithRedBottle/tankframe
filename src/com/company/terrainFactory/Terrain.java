@@ -1,6 +1,6 @@
 package com.company.terrainFactory;
 
-import com.company.GameObject;
+import com.company.model.GameObject;
 
 /**
  * @ClassName
@@ -10,4 +10,6 @@ import com.company.GameObject;
  * @Version 1.0
  **/
 public abstract class  Terrain extends GameObject {
+    public boolean isAlive;
+    public abstract void disappear();
 }

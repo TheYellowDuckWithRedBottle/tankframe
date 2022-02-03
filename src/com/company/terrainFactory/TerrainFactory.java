@@ -1,9 +1,7 @@
 package com.company.terrainFactory;
 
-import com.company.Dir;
-import com.company.Wall;
+import com.company.enums.Dir;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

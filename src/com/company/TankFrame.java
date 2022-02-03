@@ -1,15 +1,16 @@
 package com.company;
 
+import com.company.enums.Dir;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import   java.util.List;
 
 public class TankFrame extends Frame {
     public static int GAME_WIDTH = 1500,GAME_HEIGHT=1000;
     GameModel gm = GameModel.getInstance();
     public TankFrame() throws HeadlessException {
+        super.setBackground(Color.BLACK);
         setSize(GAME_WIDTH,GAME_HEIGHT);
         setResizable(false);
         setVisible(true);
@@ -31,7 +32,7 @@ public class TankFrame extends Frame {
         }
         Graphics gOffScreen = offsetScreenImage.getGraphics();
         Color c = gOffScreen.getColor();
-        gOffScreen.setColor(Color.white);
+        gOffScreen.setColor(Color.BLACK);
         gOffScreen.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
         gOffScreen.setColor(c);
         paint(gOffScreen);

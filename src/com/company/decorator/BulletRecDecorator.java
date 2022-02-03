@@ -1,6 +1,6 @@
 package com.company.decorator;
 
-import com.company.GameObject;
+import com.company.model.GameObject;
 
 import java.awt.*;
 

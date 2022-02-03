@@ -1,16 +1,22 @@
 package com.company;
 
-import com.company.Collide.Collider;
 import com.company.Collide.ColliderChain;
-import com.company.Collide.TankBulletCollider;
-import com.company.Collide.TankTankCollider;
-import com.company.props.Pantacle;
+import com.company.enums.Dir;
+import com.company.enums.Group;
+import com.company.mediaLoad.BgMusicMgr;
+import com.company.model.Explode;
+import com.company.model.GameObject;
+import com.company.model.Home;
+import com.company.model.Tank;
 import com.company.props.Prop;
 import com.company.terrainFactory.*;
 
+import java.applet.AudioClip;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @ClassName
@@ -27,6 +33,7 @@ public class GameModel {
     public List<GameObject> objects = new ArrayList<>();
     Tank tank = new Tank(200, 200, Group.GOOD, this);
     ColliderChain colliderChain = new ColliderChain();
+    List<AudioClip> audioClips = BgMusicMgr.getAudios();
 
     private static final GameModel INSTANCE = new GameModel();
     public static GameModel getInstance() {
@@ -38,9 +45,9 @@ public class GameModel {
         }
         objects.add(tank);//添加坦克
         objects.add(Home.getInstance());//添加老窝
-        CreateTerrain createTerrain = new SteelFactory();
-        List<Terrain> terrains= createTerrain.CreateTerrain(500,100,Dir.LEFT,5);
-        CreateTerrain createWall =new WallFactory();
+        CreateTerrain createTerrain = new SteelFactory();//钢铁工厂
+        List<Terrain> terrains= createTerrain.CreateTerrain(500,100, Dir.LEFT,5);
+        CreateTerrain createWall =new WallFactory();//墙工厂
         List<Terrain> walls = createWall.CreateTerrain(600,100,Dir.RIGHT,10);
         for (var i =0;i<terrains.size();i++){
             objects.add(terrains.get(i));
@@ -50,7 +57,7 @@ public class GameModel {
         }
         Prop prop= new Prop();
         objects.add(prop);
-
+        buildFortress(createWall);
     }
     public void add(GameObject gm){
         this.objects.add(gm);
@@ -59,8 +66,10 @@ public class GameModel {
         for(var i =0;i<objects.size();i++){
             if(objects.get(i) instanceof Tank){
                 Tank tank = (Tank)objects.get(i);
+                Explode explode = new Explode(tank.getX(),tank.getY());
                 if(tank.getGroup()==Group.BAD){
                     objects.remove(i);
+                    GameModel.getInstance().objects.add(explode);
                 }
             }
         }
@@ -71,8 +80,22 @@ public class GameModel {
                 Tank tank = (Tank)objects.get(i);
                 if(tank.getGroup()==Group.BAD){
                     tank.setMoving(false);
+//                    new Timer().schedule(new TimerTask() {
+//                        public void run() {
+//
+//                        }
+//                    }, 2000);
                 }
             }
+        }
+    }
+    public void buildFortress(CreateTerrain createTerrain){
+        Home home= Home.getInstance();
+        List<Terrain> fortresses = createTerrain.CreateTerrain(home.x-home.width-10,home.y,Dir.UP,2);
+        fortresses.addAll(createTerrain.CreateTerrain(home.x,home.y-home.heigh-10,Dir.RIGHT,2));
+        fortresses.addAll( createTerrain.CreateTerrain(home.x+home.width,home.y,Dir.DOWN,1));
+        for(var fortress :fortresses){
+            objects.add(fortress);
         }
     }
     public void remove(GameObject gm){

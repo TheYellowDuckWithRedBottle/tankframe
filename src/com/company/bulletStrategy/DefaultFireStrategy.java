@@ -1,8 +1,8 @@
 package com.company.bulletStrategy;
 
-import com.company.Bullet;
+import com.company.model.Bullet;
 import com.company.GameModel;
-import com.company.Tank;
+import com.company.model.Tank;
 import com.company.decorator.BulletRecDecorator;
 import com.company.decorator.BulletTailDecorator;
 import com.company.decorator.GameObectDecorator;

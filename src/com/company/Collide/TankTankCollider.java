@@ -1,9 +1,7 @@
 package com.company.Collide;
 
-import com.company.Bullet;
-import com.company.Explode;
-import com.company.GameObject;
-import com.company.Tank;
+import com.company.model.GameObject;
+import com.company.model.Tank;
 
 import java.awt.*;
 

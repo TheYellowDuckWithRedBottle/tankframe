@@ -1,7 +1,6 @@
 package com.company.terrainFactory;
 
-import com.company.GameObject;
-import com.company.ResourceMgr;
+import com.company.mediaLoad.ResourceMgr;
 
 import java.awt.*;
 
@@ -19,10 +18,16 @@ public class Glass extends Terrain {
         this.y=y;
         this.width = ResourceMgr.stell.getWidth();
         this.height = ResourceMgr.stell.getHeight();
+
     }
 
     @Override
     public void paint(Graphics g) {
+
+    }
+
+    @Override
+    public void disappear() {
 
     }
 }

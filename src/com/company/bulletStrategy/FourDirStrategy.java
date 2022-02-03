@@ -1,9 +1,9 @@
 package com.company.bulletStrategy;
 
-import com.company.Bullet;
-import com.company.Dir;
+import com.company.model.Bullet;
+import com.company.enums.Dir;
 import com.company.GameModel;
-import com.company.Tank;
+import com.company.model.Tank;
 
 /**
  * @ClassName

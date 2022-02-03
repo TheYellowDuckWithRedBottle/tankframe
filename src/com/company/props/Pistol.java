@@ -1,11 +1,9 @@
 package com.company.props;
 
-import com.company.GameObject;
-import com.company.ResourceMgr;
+import com.company.mediaLoad.ResourceMgr;
 import com.company.TankFrame;
 
 import java.awt.*;
-import java.util.Random;
 
 /**
  * @ClassName

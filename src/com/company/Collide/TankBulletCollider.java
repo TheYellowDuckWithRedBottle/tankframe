@@ -1,6 +1,10 @@
 package com.company.Collide;
 
 import com.company.*;
+import com.company.model.Bullet;
+import com.company.model.Explode;
+import com.company.model.GameObject;
+import com.company.model.Tank;
 
 import java.awt.*;
 
@@ -14,7 +18,7 @@ import java.awt.*;
 public class TankBulletCollider implements Collider {
     @Override
     public boolean collide(GameObject go1, GameObject go2) {
-        if(go1 instanceof Bullet&&go2 instanceof Tank){
+        if(go1 instanceof Bullet &&go2 instanceof Tank){
             Bullet bullet = (Bullet) go1;
             Tank tank = (Tank) go2;
             Rectangle bulletRec = new Rectangle(bullet.getX(),bullet.getY(),bullet.getWidth(),bullet.getHeight());

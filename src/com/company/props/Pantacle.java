@@ -1,13 +1,9 @@
 package com.company.props;
 
-import com.company.GameModel;
-import com.company.GameObject;
-import com.company.ResourceMgr;
+import com.company.mediaLoad.ResourceMgr;
 import com.company.TankFrame;
-import com.company.decorator.GameObectDecorator;
 
 import java.awt.*;
-import java.util.Random;
 
 /**
  * @ClassName
@@ -27,7 +23,6 @@ public class Pantacle extends Prop {
 
     @Override
     public void paint(Graphics g) {
-        super.paint(g);
         if(isLiving) {
             g.drawImage(ResourceMgr.pantacel, x, y, null);
         }

@@ -1,6 +1,8 @@
 package com.company.props;
 
 import com.company.*;
+import com.company.mediaLoad.ResourceMgr;
+import com.company.model.GameObject;
 
 import java.awt.*;
 import java.util.Random;
@@ -23,7 +25,7 @@ public  class Prop extends GameObject {
         this.x=x;
         this.y =y;
         PropType[] props = PropType.values();
-        propType = props[randomPos.nextInt(5)];
+        propType = props[randomPos.nextInt(6)];
     }
 
     public Prop() {
@@ -59,8 +61,10 @@ public  class Prop extends GameObject {
                         g.drawImage(ResourceMgr.bomb, x, y, null);
                         break;
                     case Helmet:
-                        g.drawImage(ResourceMgr.shovel, x, y, null);
+                        g.drawImage(ResourceMgr.protect, x, y, null);
                         break;
+                    case shovel:
+                        g.drawImage(ResourceMgr.shovel,x,y,null);
                     case Pantcle:
                         g.drawImage(ResourceMgr.pantacel, x, y, null);
                         break;
@@ -86,7 +90,7 @@ public  class Prop extends GameObject {
     }
     public  PropType getRandomProp(){
         PropType[] props = PropType.values();
-        propType = props[randomPos.nextInt(5)];
+        propType = props[randomPos.nextInt(6)];
        return propType;
     }
 }

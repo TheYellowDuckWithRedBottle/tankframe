@@ -1,4 +1,7 @@
-package com.company;
+package com.company.model;
+
+import com.company.GameModel;
+import com.company.mediaLoad.ResourceMgr;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -7,22 +10,22 @@ import java.awt.image.BufferedImage;
  * @ClassName
  * @Description TODO
  * @Author LeviFan
- * @Date 2021/12/27 13:53
+ * @Date 2022/1/30 15:34
  * @Version 1.0
  **/
-public class Explode extends GameObject {
+public class Born extends GameObject {
     private int step = 0;
-    private BufferedImage[] explodes = ResourceMgr.explodes;
+    private BufferedImage[] born = ResourceMgr.born;
 
-    public Explode(int x, int y) {
+    public Born(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(explodes[step++], x, y, null);
-        if (step > explodes.length - 1) {
+        g.drawImage(born[step++], x-born[1].getWidth()/2, y, null);
+        if (step > born.length - 1) {
             GameModel.getInstance().objects.remove(this);
             step = 0;
         }

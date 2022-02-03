@@ -1,4 +1,4 @@
-package com.company;
+package com.company.mediaLoad;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

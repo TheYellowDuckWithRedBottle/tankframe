@@ -1,5 +1,7 @@
-package com.company;
+package com.company.terrainFactory;
 
+import com.company.GameModel;
+import com.company.mediaLoad.ResourceMgr;
 import com.company.terrainFactory.Terrain;
 
 import java.awt.*;
@@ -19,6 +21,7 @@ public class Wall extends Terrain {
         this.y=y;
         this.width = ResourceMgr.wall.getWidth();
         this.height = ResourceMgr.wall.getHeight();
+        isAlive = true;
     }
 
     @Override
@@ -26,5 +29,11 @@ public class Wall extends Terrain {
         //g.fillRect(x,y,width,height);
         g.drawImage(ResourceMgr.wall,x,y,null);
 
+    }
+
+    @Override
+    public void disappear() {
+        isAlive = false;
+        GameModel.getInstance().objects.remove(this);
     }
 }
