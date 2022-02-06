@@ -38,5 +38,12 @@ public class GlassFactory implements CreateTerrain {
 
         }
         return glasses;
-    };
+    }
+
+    @Override
+    public List<Terrain> CreateCompWall(int x, int y) {
+        return null;
+    }
+
+    ;
 }

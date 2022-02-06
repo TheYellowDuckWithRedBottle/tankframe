@@ -58,20 +58,21 @@ public class ResourceMgr {
             bulletR = ImageUtility.RotateImage(bulletU,90);
             bulletD = ImageUtility.RotateImage(bulletU,180);
 
-            home =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\home1.png"));
+            home =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\imgs\\home1.png"));
             homeDestroy = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\home_destroyed.png"));
 
-            wall = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\walls.gif"));
-            stell = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\steels.gif"));
+            wall = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\imgs\\brick.png"));
+            stell = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\imgs\\iron.png"));
             grass = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\grass.png"));
 
             pantacel= ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\05.png"));
             timer= ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\01.png"));
             bomb =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\04.png"));
+            shovel =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\imgs\\food_iron.png"));
             gun =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\06.png"));
             life=ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\03.png"));
             protect = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\imgs\\food_protect.png"));
-            shovel =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\02.png"));
+
 
             for(var i =1;i<8;i++){
                 explodes[i]=ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\blast"+i+".gif"));

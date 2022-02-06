@@ -7,6 +7,8 @@ import com.company.model.Tank;
 import com.company.bulletStrategy.AttackWallStrategy;
 import com.company.bulletStrategy.SpeedFireStrategy;
 import com.company.props.Prop;
+import com.company.terrainFactory.CreateTerrain;
+import com.company.terrainFactory.SteelFactory;
 
 import java.awt.*;
 
@@ -33,6 +35,10 @@ public class TankPropCollider implements Collider{
                             GameModel.getInstance().destroyEmeryTanks();
                             break;
                         case Helmet:
+                            break;
+                        case shovel:
+                            CreateTerrain createIron = new SteelFactory();
+                            GameModel.getInstance().buildFortress(createIron);
                             break;
                         case Pantcle:
                             tank.startNum ++;
@@ -72,6 +78,10 @@ public class TankPropCollider implements Collider{
                             break;
                         case Helmet:
                             tank.transform();
+                            break;
+                        case shovel:
+                            CreateTerrain createIron = new SteelFactory();
+                            GameModel.getInstance().buildFortress(createIron);
                             break;
                         case Pantcle:
                             tank.startNum ++;

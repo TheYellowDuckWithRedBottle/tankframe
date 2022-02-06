@@ -34,6 +34,7 @@ public class GameModel {
     Tank tank = new Tank(200, 200, Group.GOOD, this);
     ColliderChain colliderChain = new ColliderChain();
     List<AudioClip> audioClips = BgMusicMgr.getAudios();
+    List<Terrain> terrains = new ArrayList<>();
 
     private static final GameModel INSTANCE = new GameModel();
     public static GameModel getInstance() {
@@ -47,7 +48,9 @@ public class GameModel {
         objects.add(Home.getInstance());//添加老窝
         CreateTerrain createTerrain = new SteelFactory();//钢铁工厂
         List<Terrain> terrains= createTerrain.CreateTerrain(500,100, Dir.LEFT,5);
+
         CreateTerrain createWall =new WallFactory();//墙工厂
+
         List<Terrain> walls = createWall.CreateTerrain(600,100,Dir.RIGHT,10);
         for (var i =0;i<terrains.size();i++){
             objects.add(terrains.get(i));
@@ -80,20 +83,26 @@ public class GameModel {
                 Tank tank = (Tank)objects.get(i);
                 if(tank.getGroup()==Group.BAD){
                     tank.setMoving(false);
-//                    new Timer().schedule(new TimerTask() {
-//                        public void run() {
-//
-//                        }
-//                    }, 2000);
                 }
             }
         }
     }
     public void buildFortress(CreateTerrain createTerrain){
         Home home= Home.getInstance();
-        List<Terrain> fortresses = createTerrain.CreateTerrain(home.x-home.width-10,home.y,Dir.UP,2);
-        fortresses.addAll(createTerrain.CreateTerrain(home.x,home.y-home.heigh-10,Dir.RIGHT,2));
-        fortresses.addAll( createTerrain.CreateTerrain(home.x+home.width,home.y,Dir.DOWN,1));
+        terrains = new ArrayList<>();
+        List<Terrain> fortresses = new ArrayList<>();
+        List<Terrain> terrains0= createTerrain.CreateCompWall(home.x-home.width,home.y);//创建一个墙
+        List<Terrain> terrains1= createTerrain.CreateCompWall(home.x-home.width,home.y-home.heigh);//创建一个墙
+        List<Terrain> terrains2= createTerrain.CreateCompWall(home.x,home.y-home.heigh);
+        List<Terrain> terrains3= createTerrain.CreateCompWall(home.x+home.width,home.y-home.heigh);
+        List<Terrain> terrains4= createTerrain.CreateCompWall(home.x+home.width,home.y);
+
+        fortresses.addAll(terrains0);
+        fortresses.addAll(terrains1);
+        fortresses.addAll(terrains2);
+        fortresses.addAll(terrains3);
+        fortresses.addAll(terrains4);
+        terrains=fortresses;
         for(var fortress :fortresses){
             objects.add(fortress);
         }
