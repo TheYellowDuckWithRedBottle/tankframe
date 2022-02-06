@@ -26,9 +26,11 @@ public class TankBulletCollider implements Collider {
             if(bullet.getGroup()!=tank.getGroup()){
                 if(bulletRec.intersects(tankRec)){
                     bullet.setLiving(false);
-                    tank.setLiving(false);
-                    Explode explode = new Explode(tank.getX(),tank.getY());
-                    GameModel.getInstance().objects.add(explode);
+                    if(!tank.isInvincible){
+                        tank.setLiving(false);
+                        Explode explode = new Explode(tank.getX(),tank.getY());
+                        GameModel.getInstance().objects.add(explode);
+                    }
                     return false;
                 };
             }
@@ -41,9 +43,11 @@ public class TankBulletCollider implements Collider {
             if(bullet.getGroup()!=tank.getGroup()){
                 if(bulletRec.intersects(tankRec)){
                     bullet.setLiving(false);
-                    tank.setLiving(false);
-                    Explode explode = new Explode(tank.getX(),tank.getY());
-                    GameModel.getInstance().objects.add(explode);
+                    if(!tank.isInvincible){
+                        tank.setLiving(false);
+                        Explode explode = new Explode(tank.getX(),tank.getY());
+                        GameModel.getInstance().objects.add(explode);
+                    }
                     return false;
                 };
             }

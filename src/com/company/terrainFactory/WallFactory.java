@@ -28,11 +28,15 @@ public class WallFactory implements CreateTerrain  {
         return walls;
     }
     @Override
-    public  List<Terrain> CreateTerrain(int x, int y, Dir dir, int number){
+    public  List<Terrain> CreateTerrain(int x, int y, Dir dir, int number,boolean isWhole){
         List<Terrain> walls = new ArrayList<>();
         for(int i=0;i<number;i++){
             Wall wall = (new Wall(x,y));
-            walls.add(wall);
+            if(isWhole){
+                walls.addAll(CreateCompWall(x,y));
+            }else{
+                walls.add(wall);
+            }
             switch (dir) {
                 case LEFT:
                     x -=wall.width ;

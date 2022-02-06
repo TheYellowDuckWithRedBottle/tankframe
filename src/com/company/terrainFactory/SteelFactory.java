@@ -15,11 +15,15 @@ import java.util.List;
  **/
 public class SteelFactory implements CreateTerrain {
 @Override
-    public  List<Terrain> CreateTerrain(int x, int y, Dir dir, int number){
+    public  List<Terrain> CreateTerrain(int x, int y, Dir dir, int number,boolean isWhole){
         List<Terrain> steels = new ArrayList<>();
         for(int i=0;i<number;i++){
             Steel steel = (new Steel(x,y));
-            steels.add(steel);
+            if(isWhole){
+                steels.addAll(CreateCompWall(x,y));
+            }else{
+                steels.add(steel);
+            }
             switch (dir) {
                 case LEFT:
                     x -=steel.width ;

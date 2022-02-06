@@ -47,11 +47,11 @@ public class GameModel {
         objects.add(tank);//添加坦克
         objects.add(Home.getInstance());//添加老窝
         CreateTerrain createTerrain = new SteelFactory();//钢铁工厂
-        List<Terrain> terrains= createTerrain.CreateTerrain(500,100, Dir.LEFT,5);
+        List<Terrain> terrains= createTerrain.CreateTerrain(500,100, Dir.LEFT,5,true);
 
         CreateTerrain createWall =new WallFactory();//墙工厂
 
-        List<Terrain> walls = createWall.CreateTerrain(600,100,Dir.RIGHT,10);
+        List<Terrain> walls = createWall.CreateTerrain(600,100,Dir.RIGHT,10,true);
         for (var i =0;i<terrains.size();i++){
             objects.add(terrains.get(i));
         }

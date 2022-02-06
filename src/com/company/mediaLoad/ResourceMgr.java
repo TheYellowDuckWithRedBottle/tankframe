@@ -24,7 +24,7 @@ public class ResourceMgr {
     public static BufferedImage bomb;
     public static BufferedImage gun;
     public static BufferedImage life;
-    public static BufferedImage protect;
+    public static BufferedImage protect, protect1,protect2;
     public static BufferedImage shovel;
 
     static{
@@ -72,6 +72,9 @@ public class ResourceMgr {
             gun =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\06.png"));
             life=ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\03.png"));
             protect = ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\imgs\\food_protect.png"));
+             var protectWhole =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\imgs\\protect.png"));
+            protect1 = protectWhole.getSubimage(0,0,protectWhole.getWidth()/2,protectWhole.getHeight());
+            protect2 = protectWhole.getSubimage(protectWhole.getWidth()/2,0,protectWhole.getWidth()/2,protectWhole.getHeight());
 
 
             for(var i =1;i<8;i++){

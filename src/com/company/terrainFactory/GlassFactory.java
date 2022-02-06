@@ -14,7 +14,7 @@ import java.util.List;
  **/
 public class GlassFactory implements CreateTerrain {
     @Override
-    public  List<Terrain> CreateTerrain (int x, int y, Dir dir, int number){
+    public  List<Terrain> CreateTerrain (int x, int y, Dir dir, int number,boolean isWhole){
         List<Terrain> glasses = new ArrayList<>();
         for(int i=0;i<number;i++){
             Glass glass = (new Glass(x,y));

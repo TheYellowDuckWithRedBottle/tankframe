@@ -23,8 +23,13 @@ public class Tank extends GameObject {
     public int startNum=0;
     public int life = 1;
     private Group group;
+    public boolean isInvincible = false;
+    public int timer = 0;//无敌计时器
+    public int InvincibleTime= 9000;
+
     private Random randomDir = new Random();
     public FireStrategy fireStrategy;
+
 
 
     public int getX() {
@@ -69,95 +74,108 @@ public class Tank extends GameObject {
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
+    public void drawProtect(Graphics g){
+        if(isInvincible){
+            if(timer<InvincibleTime) {
+                timer+=10;
+                g.drawImage(ResourceMgr.protect1,x,y,null);
+                g.drawImage(ResourceMgr.protect2,x,y,null);
+            }else{
+                this.isInvincible = false;
+            }
+        }
+    }
 
     @Override
     public void paint(Graphics g) {
         if(life>0){
-            if (this.isLiving) {
-                switch (dir) {
-                    case LEFT:
-                        if(startNum ==0){
-                            g.drawImage(group == Group.GOOD ? ResourceMgr.tankL : ResourceMgr.badTankL, x, y, null);
-                        }else if(startNum ==1){
-                            if(group == Group.GOOD){
-                                g.setColor(Color.GREEN);
-                                g.drawRect(x,y,30,30);
-                                g.drawImage(ResourceMgr.tankL1, x, y, null);
+                drawProtect(g);
+                if (this.isLiving) {
+                    switch (dir) {
+                        case LEFT:
+                            if(startNum ==0){
+                                g.drawImage(group == Group.GOOD ? ResourceMgr.tankL : ResourceMgr.badTankL, x, y, null);
+                            }else if(startNum ==1){
+                                if(group == Group.GOOD){
+                                    g.setColor(Color.GREEN);
+                                    g.drawRect(x,y,30,30);
+                                    g.drawImage(ResourceMgr.tankL1, x, y, null);
+                                }
+                            }else if(startNum ==2){
+                                if(group ==Group.GOOD){
+                                    g.setColor(Color.YELLOW);
+                                    g.drawRect(x,y,30,30);
+                                    g.drawImage(ResourceMgr.tank2L, x, y, null);
+                                }
                             }
-                        }else if(startNum ==2){
-                            if(group ==Group.GOOD){
-                                g.setColor(Color.YELLOW);
-                                g.drawRect(x,y,30,30);
-                                g.drawImage(ResourceMgr.tank2L, x, y, null);
+                            break;
+                        case RIGHT:
+                            if(startNum ==0){
+                                g.drawImage(group == Group.GOOD ? ResourceMgr.tankR : ResourceMgr.badTankR, x, y, null);
+                            }else if(startNum ==1){
+                                if(group ==Group.GOOD){
+                                    g.setColor(Color.GREEN);
+                                    g.drawRect(x,y,30,30);
+                                    g.drawImage(ResourceMgr.tankR1, x, y, null);
+                                }
+                            }else if(startNum ==2){
+                                if(group ==Group.GOOD){
+                                    g.setColor(Color.YELLOW);
+                                    g.drawRect(x,y,30,30);
+                                    g.drawImage(ResourceMgr.tank2R, x, y, null);
+                                }
                             }
-                        }
-                        break;
-                    case RIGHT:
-                        if(startNum ==0){
-                            g.drawImage(group == Group.GOOD ? ResourceMgr.tankR : ResourceMgr.badTankR, x, y, null);
-                        }else if(startNum ==1){
-                            if(group ==Group.GOOD){
-                                g.setColor(Color.GREEN);
-                                g.drawRect(x,y,30,30);
-                                g.drawImage(ResourceMgr.tankR1, x, y, null);
+                            break;
+                        case UP:
+                            if(startNum ==0){
+                                g.drawImage(group == Group.GOOD ? ResourceMgr.tankU : ResourceMgr.badTankU, x, y, null);
                             }
-                        }else if(startNum ==2){
-                            if(group ==Group.GOOD){
-                                g.setColor(Color.YELLOW);
-                                g.drawRect(x,y,30,30);
-                                g.drawImage(ResourceMgr.tank2R, x, y, null);
-                            }
-                        }
-                        break;
-                    case UP:
-                        if(startNum ==0){
-                            g.drawImage(group == Group.GOOD ? ResourceMgr.tankU : ResourceMgr.badTankU, x, y, null);
-                        }
-                        else if(startNum ==1) {
-                            if(group ==Group.GOOD){
-                                g.setColor(Color.GREEN);
-                                g.drawRect(x,y,30,30);
-                                g.drawImage(ResourceMgr.tankU1, x, y, null);
-                            }
+                            else if(startNum ==1) {
+                                if(group ==Group.GOOD){
+                                    g.setColor(Color.GREEN);
+                                    g.drawRect(x,y,30,30);
+                                    g.drawImage(ResourceMgr.tankU1, x, y, null);
+                                }
 
-                        }else if(startNum ==2){
-                            if(group ==Group.GOOD){
-                                g.setColor(Color.YELLOW);
-                                g.drawRect(x,y,30,30);
-                               g.drawImage(ResourceMgr.tank2U, x, y, null);
-                            }
+                            }else if(startNum ==2){
+                                if(group ==Group.GOOD){
+                                    g.setColor(Color.YELLOW);
+                                    g.drawRect(x,y,30,30);
+                                    g.drawImage(ResourceMgr.tank2U, x, y, null);
+                                }
 
-                        }
-                        break;
-                    case DOWN:
-                        if(startNum ==0){
-                            g.drawImage(group == Group.GOOD ? ResourceMgr.tankD : ResourceMgr.badTankD, x, y, null);
-                        } else if(startNum ==1){
-                            if(group ==Group.GOOD){
-                                g.setColor(Color.GREEN);
-                                g.drawRect(x,y,30,30);
-                                g.drawImage(ResourceMgr.tankD1, x, y, null);
                             }
-                        }else if(startNum ==2){
-                            if(group ==Group.GOOD){
-                                g.setColor(Color.YELLOW);
-                                g.drawRect(x,y,30,30);
-                                g.drawImage(ResourceMgr.tank2D, x, y, null);
+                            break;
+                        case DOWN:
+                            if(startNum ==0){
+                                g.drawImage(group == Group.GOOD ? ResourceMgr.tankD : ResourceMgr.badTankD, x, y, null);
+                            } else if(startNum ==1){
+                                if(group ==Group.GOOD){
+                                    g.setColor(Color.GREEN);
+                                    g.drawRect(x,y,30,30);
+                                    g.drawImage(ResourceMgr.tankD1, x, y, null);
+                                }
+                            }else if(startNum ==2){
+                                if(group ==Group.GOOD){
+                                    g.setColor(Color.YELLOW);
+                                    g.drawRect(x,y,30,30);
+                                    g.drawImage(ResourceMgr.tank2D, x, y, null);
+                                }
                             }
-                        }
-                        break;
-                    default:
-                        break;
+                            break;
+                        default:
+                            break;
+                    }
+                    move();
+                } else {
+                    GameModel.getInstance().objects.remove(this);
+                    return;
                 }
-                move();
-            } else {
-                GameModel.getInstance().objects.remove(this);
-                return;
-            }
         }
     }
     public void transform(){
-
+        this.isInvincible = true;
+         timer = 0;
     }
     public void setFireStrategy(){
         if(startNum ==1){
