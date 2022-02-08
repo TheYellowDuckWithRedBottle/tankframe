@@ -18,7 +18,7 @@ public class SteelFactory implements CreateTerrain {
     public  List<Terrain> CreateTerrain(int x, int y, Dir dir, int number,boolean isWhole){
         List<Terrain> steels = new ArrayList<>();
         for(int i=0;i<number;i++){
-            Steel steel = (new Steel(x,y));
+            Steel steel = new Steel(x,y);
             if(isWhole){
                 steels.addAll(CreateCompWall(x,y));
             }else{

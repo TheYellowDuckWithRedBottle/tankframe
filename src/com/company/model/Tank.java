@@ -11,7 +11,6 @@ import java.awt.*;
 import java.util.Random;
 
 public class Tank extends GameObject {
-
     public int oldX;
     public int oldY;
     public int width = ResourceMgr.tankL.getWidth();
@@ -26,49 +25,38 @@ public class Tank extends GameObject {
     public boolean isInvincible = false;
     public int timer = 0;//无敌计时器
     public int InvincibleTime= 9000;
-
     private Random randomDir = new Random();
     public FireStrategy fireStrategy;
 
-
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setLiving(boolean living) {
-        isLiving = living;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public Dir getDir() {
-        return dir;
-    }
-
-    public void setDir(Dir dir) {
-        this.dir = dir;
-    }
     public void setX(int x) {
         this.x = x;
     }
-
     public void setY(int y) {
         this.y = y;
+    }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+    public int getWidth() {
+        return width;
+    }
+    public int getHeight() {
+        return height;
+    }
+    public void setLiving(boolean living) {
+        isLiving = living;
+    }
+    public Group getGroup() {
+        return group;
+    }
+    public Dir getDir() {
+        return dir;
+    }
+    public void setDir(Dir dir) {
+        this.dir = dir;
     }
 
     public void setMoving(boolean moving) {
@@ -78,14 +66,13 @@ public class Tank extends GameObject {
         if(isInvincible){
             if(timer<InvincibleTime) {
                 timer+=10;
-                g.drawImage(ResourceMgr.protect1,x,y,null);
-                g.drawImage(ResourceMgr.protect2,x,y,null);
+                g.drawImage(ResourceMgr.protect1,x,y,Color.GREEN,null);
+                g.drawImage(ResourceMgr.protect2,x,y,Color.YELLOW,null);
             }else{
                 this.isInvincible = false;
             }
         }
     }
-
     @Override
     public void paint(Graphics g) {
         if(life>0){
@@ -184,7 +171,6 @@ public class Tank extends GameObject {
             fireStrategy = new AttackWallStrategy();
         }
     }
-
     private void move() {
         oldX = this.x;
         oldY = this.y;
@@ -211,7 +197,6 @@ public class Tank extends GameObject {
         }
         checkBround();
     }
-
     public Dir GenerateRandomDir() {
         Dir[] dirs = Dir.values();
         return dirs[randomDir.nextInt(4)];
@@ -220,7 +205,6 @@ public class Tank extends GameObject {
         this.x=oldX;
         this.y=oldY;
     }
-
 
     private void checkBround() {
         if (this.x < 2) {

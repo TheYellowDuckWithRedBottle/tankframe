@@ -44,6 +44,4 @@ public class GlassFactory implements CreateTerrain {
     public List<Terrain> CreateCompWall(int x, int y) {
         return null;
     }
-
-    ;
 }
