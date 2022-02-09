@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class TankFrame extends Frame {
-    public static int GAME_WIDTH = 1500,GAME_HEIGHT=1000;
+    public static int GAME_WIDTH = 633,GAME_HEIGHT=700;
     GameModel gm = GameModel.getInstance();
     public TankFrame() throws HeadlessException {
         super.setBackground(Color.BLACK);

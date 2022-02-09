@@ -23,7 +23,7 @@ import static java.lang.Integer.parseInt;
  **/
 public class MapBuilder {
     public static List<GameObject> ReadMap()  {
-        String originData = readFileByChars("F:\\Java\\network-pop3\\tankframe\\src\\com\\company\\Map\\data\\1.map");
+        String originData = readFileByChars("F:\\Java\\network-pop3\\tankframe\\src\\com\\company\\Map\\data\\2.map");
         Map map = formatData(originData);
         List<GameObject> gameObjects= processFormatData(map);
 
@@ -82,16 +82,28 @@ public class MapBuilder {
        String[] coordCouple = coords.split(";");
        for(var coord:coordCouple){
            var coordxy= coord.split(",");
-           int x =parseInt(coordxy[0]);
-           int y =parseInt(coordxy[1]);
-           List<Terrain> terrain =null;
-           if(coordxy.length==3){
-               terrain = factory.CreateTerrain(x,y, Dir.RIGHT,1,false);
-           }else{
-                terrain = factory.CreateCompWall(x,y);
+           if(coordxy.length<2){
+               System.out.println(coordxy[0]);
            }
-
-           gameObjects.addAll(terrain);
+           try{
+               int y =parseInt(coordxy[0]);
+               int x =parseInt(coordxy[1]);
+               List<Terrain> terrain =null;
+               if(coordxy.length==3){
+                   int up =parseInt(coordxy[2]);
+                   if(up==0){
+                       terrain = factory.CreateTerrain(x*48,y*48, Dir.RIGHT,2,false);
+                   }else if(up ==1){
+                       terrain = factory.CreateTerrain(x*48,y*48+24, Dir.RIGHT,2,false);
+                   }
+                   gameObjects.addAll(terrain);
+               }else{
+                   terrain = factory.CreateCompWall(x*48,y*48);
+                   gameObjects.addAll(terrain);
+               }
+           }catch (Exception e){
+               System.out.println(e);
+           }
        }
        return gameObjects;
     }

@@ -36,13 +36,13 @@ public class ResourceMgr {
             tankL = ImageUtility.RotateImage(tankU,-90);
 
             var tank1 =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\imgs\\tank_T2_1.png"));
-            tankU1 =tank.getSubimage(0,0,tank1.getWidth()/2,tank1.getHeight()/4);
+            tankU1 =tank.getSubimage(0,0,tank1.getWidth()/2-10,tank1.getHeight()/4-10);
             tankR1 = ImageUtility.RotateImage(tankU1,90);
             tankD1=ImageUtility.RotateImage(tankR1,90);;
             tankL1 = ImageUtility.RotateImage(tankU1,-90);
 
             var tank2 =ImageIO.read(new File("F:\\Java\\network-pop3\\tankframe\\src\\resource\\img\\imgs\\tank_T2_2.png"));
-            tank2U =tank.getSubimage(0,0,tank2.getWidth()/2,tank2.getHeight()/4);
+            tank2U =tank.getSubimage(0,0,tank2.getWidth()/2-10,tank2.getHeight()/4-10);
             tank2D=ImageUtility.RotateImage(tank2U,180);
             tank2R = ImageUtility.RotateImage(tank2U,90);
             tank2L = ImageUtility.RotateImage(tank2U,-90);

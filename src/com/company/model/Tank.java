@@ -240,9 +240,6 @@ public class Tank extends GameObject {
     }
 
     public void fire() {
-//        Bullet bullet = new Bullet(this.dir,this.x,this.y,this.group,this.tankFrame);
-//        bullet = ComputeButtlePos(bullet);
-//        tankFrame.bullets.add(bullet);
         fireStrategy.Fire(this);
     }
 }
