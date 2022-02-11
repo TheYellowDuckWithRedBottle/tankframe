@@ -5,11 +5,13 @@ import com.company.Map.MapBuilder;
 import com.company.enums.Dir;
 import com.company.enums.Group;
 import com.company.mediaLoad.BgMusicMgr;
+import com.company.mediaLoad.ResourceMgr;
 import com.company.model.Explode;
 import com.company.model.GameObject;
 import com.company.model.Home;
 import com.company.model.Tank;
 import com.company.props.Prop;
+import com.company.tankPool.TankPool;
 import com.company.terrainFactory.*;
 
 import java.applet.AudioClip;
@@ -27,12 +29,10 @@ import java.util.TimerTask;
  * @Version 1.0
  **/
 public class GameModel {
-    //    public List<Bullet> bullets=new ArrayList<>();
-//    List<Tank> tanks = new ArrayList<>();
-//    List<Explode> explodes = new ArrayList<>();
 
     public List<GameObject> objects = new ArrayList<>();
-    Tank tank = new Tank(Home.getInstance().x-200, Home.getInstance().y, Group.GOOD, this);
+
+    Tank tank = new Tank(Home.getInstance().x-ResourceMgr.wall.getWidth()*4, Home.getInstance().y, Group.GOOD, this);
     ColliderChain colliderChain = new ColliderChain();
     List<AudioClip> audioClips = BgMusicMgr.getAudios();
     List<Terrain> terrains = new ArrayList<>();
@@ -42,28 +42,26 @@ public class GameModel {
         return INSTANCE;
     }
     private GameModel() {
-        for (var i = 1; i < 2; i++) {
-            objects.add(new Tank(i * 1, i * 100, Group.BAD, this));
-        }
-        objects.add(tank);//添加坦克
-        objects.add(Home.getInstance());//添加老窝
-//        CreateTerrain createTerrain = new SteelFactory();//钢铁工厂
-//        List<Terrain> terrains= createTerrain.CreateTerrain(500,100, Dir.LEFT,5,true);
-//
-       CreateTerrain createWall =new WallFactory();//墙工厂
-//        List<Terrain> walls = createWall.CreateTerrain(600,100,Dir.RIGHT,10,true);
-//        for (var i =0;i<walls.size();i++){
-//            objects.add(walls.get(i));
+        //添加敌方坦克
+//        for (var i = 1; i < 2; i++) {
+//            objects.add(new Tank(i * 1, i * 1, Group.BAD, this));
 //        }
-         List<GameObject> terrainObjects =MapBuilder.ReadMap();
-         objects.addAll(terrainObjects);
-        for (var i =0;i<terrains.size();i++){
-            objects.add(terrains.get(i));
+        TankPool tankPool = TankPool.getInstance(5,5,6);
+        List<Tank> tanks = tankPool.initTanks();
+        for(var tank:tanks){
+            objects.add(tank);
         }
-
-        Prop prop= new Prop();
-        objects.add(prop);
+        objects.add(tank);//添加我方坦克
+        objects.add(Home.getInstance());//添加老窝
+        CreateTerrain createWall =new WallFactory();//防御工事
         buildFortress(createWall);
+
+        List<GameObject> terrainObjects =MapBuilder.ReadMap();//添加地图
+        objects.addAll(terrainObjects);
+
+        Prop prop= new Prop();//添加道具
+        objects.add(prop);
+
     }
     public void add(GameObject gm){
         this.objects.add(gm);
@@ -94,17 +92,14 @@ public class GameModel {
         Home home= Home.getInstance();
         terrains = new ArrayList<>();
         List<Terrain> fortresses = new ArrayList<>();
-        List<Terrain> terrains0= createTerrain.CreateCompWall(home.x-home.width,home.y);//创建一个墙
-        List<Terrain> terrains1= createTerrain.CreateCompWall(home.x-home.width,home.y-home.heigh);//创建一个墙
-        List<Terrain> terrains2= createTerrain.CreateCompWall(home.x,home.y-home.heigh);
-        List<Terrain> terrains3= createTerrain.CreateCompWall(home.x+home.width,home.y-home.heigh);
-        List<Terrain> terrains4= createTerrain.CreateCompWall(home.x+home.width,home.y);
+        List<Terrain> terrains0 =createTerrain.CreateTerrain(home.x- ResourceMgr.wall.getWidth(),home.y+ResourceMgr.wall.getHeight(),Dir.UP,2,false);
+        List<Terrain> terrains1= createTerrain.CreateTerrain(home.x- ResourceMgr.wall.getWidth(),home.y-ResourceMgr.wall.getHeight(),Dir.RIGHT,4,false);//创建一个墙
+        List<Terrain> terrains2= createTerrain.CreateTerrain(home.x+home.width,home.y,Dir.DOWN,3,false);
 
         fortresses.addAll(terrains0);
         fortresses.addAll(terrains1);
         fortresses.addAll(terrains2);
-        fortresses.addAll(terrains3);
-        fortresses.addAll(terrains4);
+
         terrains=fortresses;
         for(var fortress :fortresses){
             objects.add(fortress);

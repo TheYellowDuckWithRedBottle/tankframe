@@ -24,7 +24,8 @@ public class Born extends GameObject {
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(born[step++], x-born[1].getWidth()/2, y, null);
+        g.drawRect(x-born[1].getWidth()/2,y,1,1);
+        g.drawImage(born[step++], x-born[2].getWidth()/2, y, null);
         if (step > born.length - 1) {
             GameModel.getInstance().objects.remove(this);
             step = 0;

@@ -26,7 +26,6 @@ public class MapBuilder {
         String originData = readFileByChars("F:\\Java\\network-pop3\\tankframe\\src\\com\\company\\Map\\data\\2.map");
         Map map = formatData(originData);
         List<GameObject> gameObjects= processFormatData(map);
-
         return gameObjects;
     }
     public static Map formatData (String originData){
@@ -52,6 +51,9 @@ public class MapBuilder {
             temp.put("GLASS",GLASSPOS);
             System.out.println(matcherIRON.group(1));
         }
+        Pattern patternTank = Pattern.compile("GLASS=(.*)");
+        Matcher matcherTank =pattern1.matcher(originData);
+
         return temp;
     }
 

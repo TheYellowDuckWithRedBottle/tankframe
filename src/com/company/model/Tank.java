@@ -84,14 +84,10 @@ public class Tank extends GameObject {
                                 g.drawImage(group == Group.GOOD ? ResourceMgr.tankL : ResourceMgr.badTankL, x, y, null);
                             }else if(startNum ==1){
                                 if(group == Group.GOOD){
-                                    g.setColor(Color.GREEN);
-                                    g.drawRect(x,y,30,30);
                                     g.drawImage(ResourceMgr.tankL1, x, y, null);
                                 }
                             }else if(startNum ==2){
                                 if(group ==Group.GOOD){
-                                    g.setColor(Color.YELLOW);
-                                    g.drawRect(x,y,30,30);
                                     g.drawImage(ResourceMgr.tank2L, x, y, null);
                                 }
                             }
@@ -101,14 +97,10 @@ public class Tank extends GameObject {
                                 g.drawImage(group == Group.GOOD ? ResourceMgr.tankR : ResourceMgr.badTankR, x, y, null);
                             }else if(startNum ==1){
                                 if(group ==Group.GOOD){
-                                    g.setColor(Color.GREEN);
-                                    g.drawRect(x,y,30,30);
                                     g.drawImage(ResourceMgr.tankR1, x, y, null);
                                 }
                             }else if(startNum ==2){
                                 if(group ==Group.GOOD){
-                                    g.setColor(Color.YELLOW);
-                                    g.drawRect(x,y,30,30);
                                     g.drawImage(ResourceMgr.tank2R, x, y, null);
                                 }
                             }
@@ -119,15 +111,11 @@ public class Tank extends GameObject {
                             }
                             else if(startNum ==1) {
                                 if(group ==Group.GOOD){
-                                    g.setColor(Color.GREEN);
-                                    g.drawRect(x,y,30,30);
                                     g.drawImage(ResourceMgr.tankU1, x, y, null);
                                 }
 
                             }else if(startNum ==2){
                                 if(group ==Group.GOOD){
-                                    g.setColor(Color.YELLOW);
-                                    g.drawRect(x,y,30,30);
                                     g.drawImage(ResourceMgr.tank2U, x, y, null);
                                 }
 
@@ -138,14 +126,10 @@ public class Tank extends GameObject {
                                 g.drawImage(group == Group.GOOD ? ResourceMgr.tankD : ResourceMgr.badTankD, x, y, null);
                             } else if(startNum ==1){
                                 if(group ==Group.GOOD){
-                                    g.setColor(Color.GREEN);
-                                    g.drawRect(x,y,30,30);
                                     g.drawImage(ResourceMgr.tankD1, x, y, null);
                                 }
                             }else if(startNum ==2){
                                 if(group ==Group.GOOD){
-                                    g.setColor(Color.YELLOW);
-                                    g.drawRect(x,y,30,30);
                                     g.drawImage(ResourceMgr.tank2D, x, y, null);
                                 }
                             }

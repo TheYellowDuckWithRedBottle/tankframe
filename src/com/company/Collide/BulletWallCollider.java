@@ -24,9 +24,9 @@ public class BulletWallCollider implements Collider {
             Rectangle wallRec =new Rectangle(wall.x,wall.y,wall.width,wall.height);
                 if(bulletRec.intersects(wallRec)){
                     wall.disappear();
-                    bullet.setLiving(false);
                     Born born = new Born(bullet.x,bullet.y);
                     GameModel.getInstance().add(born);
+                    bullet.setLiving(false);
                     return false;
                 };
         }

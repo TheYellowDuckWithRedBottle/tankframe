@@ -79,26 +79,27 @@ public class Bullet extends GameObject {
         if (!isLiving) {
             GameModel.getInstance().objects.remove(this);
         }
+        g.setColor(Color.GREEN);
         switch (dir) {
             case LEFT:
+                g.drawRect(x,y,1,1);
                 g.drawImage(ResourceMgr.bulletL, x, y, null);
                 break;
             case RIGHT:
+                g.drawRect(x,y,1,1);
                 g.drawImage(ResourceMgr.bulletR, x, y, null);
                 break;
             case UP:
+                g.drawRect(x,y,1,1);
                 g.drawImage(ResourceMgr.bulletU, x, y, null);
                 break;
             case DOWN:
+                g.drawRect(x,y,1,1);
                 g.drawImage(ResourceMgr.bulletD, x, y, null);
                 break;
             default:
                 break;
         }
-//        Color c =g.getColor();
-//        g.setColor(new Color(255,0,0));
-//        g.fillOval(x,y,width,height);
-//        g.setColor(c);
         move();
     }
 
